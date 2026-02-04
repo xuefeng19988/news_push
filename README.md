@@ -233,3 +233,105 @@ MIT License
 ---
 
 **让信息主动找到你，而不是你寻找信息。**
+## 🔧 本地开发设置
+
+### 设置本地.gitignore
+`.gitignore`文件不应该提交到Git仓库，因为它包含个人开发环境的特定配置。
+
+在本地运行以下命令创建.gitignore文件：
+```bash
+# 创建基本的.gitignore文件
+cat > .gitignore << 'EOF'
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+
+# Environment
+.env
+.venv
+
+# Temporary files
+*.tmp
+*.temp
+
+# Data files
+*.json
+*.txt
+*.csv
+
+# Project specific
+news_cache.db
+auto_push.log
+simple_push.log
+sent_*.txt
+pending_*.txt
+latest_*.txt
+## 🔧 本地开发设置
+
+### 设置本地.gitignore
+`.gitignore`文件不应该提交到Git仓库，因为它包含个人开发环境的特定配置。
+
+在本地运行以下命令创建.gitignore文件：
+```bash
+# 创建基本的.gitignore文件
+cat > .gitignore << 'EOF_GITIGNORE'
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+
+# Environment
+.env
+.venv
+
+# Temporary files
+*.tmp
+*.temp
+
+# Data files
+*.json
+*.txt
+*.csv
+
+# Project specific
+news_cache.db
+auto_push.log
+simple_push.log
+sent_*.txt
+pending_*.txt
+latest_*.txt
+EOF_GITIGNORE
+
+# 确保.gitignore本身不被跟踪
+echo ".gitignore" >> .gitignore
+```
+
+### 为什么.gitignore不提交？
+- 每个开发者的环境不同
+- 避免将个人配置提交到共享仓库
+- 保持Git仓库干净，只包含核心代码
+
+### 推荐排除的文件
+- 日志文件 (`*.log`)
+- 数据库文件 (`*.db`, `*.sqlite`)
+- 临时文件 (`*.tmp`, `*.temp`)
+- 数据文件 (`*.json`, `*.txt`)
+- 环境配置文件 (`.env`)
+- Python缓存文件 (`__pycache__/`)
