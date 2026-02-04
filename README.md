@@ -335,6 +335,9 @@ nano config/.env
 source config/.env
 
 # 验证配置
+
+# 或者使用配置脚本
+./setup_config.sh
 echo "WhatsApp号码: $WHATSAPP_NUMBER"
 echo "OpenClaw路径: $OPENCLAW_PATH"
 ```
