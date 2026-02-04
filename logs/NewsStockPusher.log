@@ -1,0 +1,40 @@
+2026-02-04 15:38:14 - NewsStockPusher - INFO - 初始化 NewsStockPusher
+2026-02-04 15:38:14 - NewsStockPusher - WARNING - 无法导入社交媒体监控器: attempted relative import beyond top-level package
+2026-02-04 15:38:14 - NewsStockPusher - INFO - 初始化完成，监控 3 只股票，15 个新闻源
+2026-02-04 15:38:14 - NewsStockPusher - INFO - 开始运行推送器
+2026-02-04 15:38:14 - NewsStockPusher - INFO - 获取股票数据...
+2026-02-04 15:38:14 - NewsStockPusher - INFO - 获取新闻数据...
+2026-02-04 15:39:32 - NewsStockPusher - INFO - 初始化 NewsStockPusher
+2026-02-04 15:39:32 - NewsStockPusher - INFO - 社交媒体监控器初始化完成
+2026-02-04 15:39:32 - NewsStockPusher - INFO - 初始化完成，监控 3 只股票，15 个新闻源
+2026-02-04 15:39:32 - NewsStockPusher - INFO - 开始运行推送器
+2026-02-04 15:39:32 - NewsStockPusher - INFO - 获取股票数据...
+2026-02-04 15:39:33 - NewsStockPusher - INFO - 获取新闻数据...
+2026-02-04 15:39:51 - NewsStockPusher - INFO - 获取社交媒体数据...
+2026-02-04 15:39:51 - NewsStockPusher - ERROR - 运行推送器异常: name 'get_whatsapp_number_display' is not defined
+2026-02-04 15:39:51 - NewsStockPusher - INFO - 清理 NewsStockPusher 资源
+2026-02-04 16:00:01 - NewsStockPusher - INFO - 初始化 NewsStockPusher
+2026-02-04 16:00:01 - NewsStockPusher - INFO - 社交媒体监控器初始化完成
+2026-02-04 16:00:01 - NewsStockPusher - INFO - 初始化完成，监控 3 只股票，15 个新闻源
+2026-02-04 16:00:01 - NewsStockPusher - INFO - 开始运行推送器
+2026-02-04 16:00:01 - NewsStockPusher - INFO - 获取股票数据...
+2026-02-04 16:00:02 - NewsStockPusher - INFO - 获取新闻数据...
+2026-02-04 16:00:21 - NewsStockPusher - INFO - 获取社交媒体数据...
+2026-02-04 16:00:21 - NewsStockPusher - ERROR - 运行推送器异常: name 'get_whatsapp_number_display' is not defined
+2026-02-04 16:00:21 - NewsStockPusher - INFO - 清理 NewsStockPusher 资源
+2026-02-04 16:03:11 - NewsStockPusher - INFO - 初始化 NewsStockPusher
+2026-02-04 16:03:11 - NewsStockPusher - INFO - 社交媒体监控器初始化完成
+2026-02-04 16:03:11 - NewsStockPusher - INFO - 初始化完成，监控 3 只股票，15 个新闻源
+2026-02-04 16:03:47 - NewsStockPusher - INFO - 初始化 NewsStockPusher
+2026-02-04 16:03:47 - NewsStockPusher - INFO - 社交媒体监控器初始化完成
+2026-02-04 16:03:47 - NewsStockPusher - INFO - 初始化完成，监控 3 只股票，15 个新闻源
+2026-02-04 16:03:47 - NewsStockPusher - INFO - 开始运行推送器
+2026-02-04 16:03:47 - NewsStockPusher - INFO - 获取股票数据...
+2026-02-04 16:03:47 - NewsStockPusher - INFO - 获取新闻数据...
+2026-02-04 16:04:04 - NewsStockPusher - INFO - 获取社交媒体数据...
+2026-02-04 16:04:04 - NewsStockPusher - INFO - 报告生成完成，长度: 429 字符
+2026-02-04 16:04:04 - NewsStockPusher - INFO - 内容已保存到: logs/push_report_20260204_160404.txt
+2026-02-04 16:04:04 - NewsStockPusher - INFO - 准备发送消息 (429 字符)
+2026-02-04 16:04:04 - NewsStockPusher - WARNING - whatsapp 消息发送失败: 未配置WhatsApp号码，请设置WHATSAPP_NUMBER环境变量
+2026-02-04 16:04:04 - NewsStockPusher - INFO - 发送结果: 所有平台发送失败: whatsapp
+2026-02-04 16:04:04 - NewsStockPusher - INFO - 清理 NewsStockPusher 资源

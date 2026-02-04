@@ -1,0 +1,31 @@
+2026-02-04 15:39:32 - SocialMediaMonitor - INFO - 社交媒体API状态:
+2026-02-04 15:39:32 - SocialMediaMonitor - INFO -   ❌ twitter: ❌ 未配置
+2026-02-04 15:39:32 - SocialMediaMonitor - INFO -   ❌ weibo: ❌ 未配置
+2026-02-04 15:39:32 - SocialMediaMonitor - INFO -   ❌ reddit: ❌ 未配置
+2026-02-04 15:39:51 - SocialMediaMonitor - INFO - 开始社交媒体监控
+2026-02-04 15:39:51 - SocialMediaMonitor - WARNING - 微博API未启用，跳过获取热搜
+2026-02-04 15:39:51 - SocialMediaMonitor - WARNING - Twitter API未启用，跳过获取趋势
+2026-02-04 15:39:51 - SocialMediaMonitor - WARNING - Reddit API未启用，跳过获取热门帖子
+2026-02-04 15:39:51 - SocialMediaMonitor - INFO - 社交媒体监控完成，耗时: 0.0秒
+2026-02-04 16:00:01 - SocialMediaMonitor - INFO - 社交媒体API状态:
+2026-02-04 16:00:01 - SocialMediaMonitor - INFO -   ❌ twitter: ❌ 未配置
+2026-02-04 16:00:01 - SocialMediaMonitor - INFO -   ❌ weibo: ❌ 未配置
+2026-02-04 16:00:01 - SocialMediaMonitor - INFO -   ❌ reddit: ❌ 未配置
+2026-02-04 16:00:21 - SocialMediaMonitor - INFO - 开始社交媒体监控
+2026-02-04 16:00:21 - SocialMediaMonitor - WARNING - 微博API未启用，跳过获取热搜
+2026-02-04 16:00:21 - SocialMediaMonitor - WARNING - Twitter API未启用，跳过获取趋势
+2026-02-04 16:00:21 - SocialMediaMonitor - WARNING - Reddit API未启用，跳过获取热门帖子
+2026-02-04 16:00:21 - SocialMediaMonitor - INFO - 社交媒体监控完成，耗时: 0.0秒
+2026-02-04 16:03:11 - SocialMediaMonitor - INFO - 社交媒体API状态:
+2026-02-04 16:03:11 - SocialMediaMonitor - INFO -   ❌ twitter: ❌ 未配置
+2026-02-04 16:03:11 - SocialMediaMonitor - INFO -   ❌ weibo: ❌ 未配置
+2026-02-04 16:03:11 - SocialMediaMonitor - INFO -   ❌ reddit: ❌ 未配置
+2026-02-04 16:03:47 - SocialMediaMonitor - INFO - 社交媒体API状态:
+2026-02-04 16:03:47 - SocialMediaMonitor - INFO -   ❌ twitter: ❌ 未配置
+2026-02-04 16:03:47 - SocialMediaMonitor - INFO -   ❌ weibo: ❌ 未配置
+2026-02-04 16:03:47 - SocialMediaMonitor - INFO -   ❌ reddit: ❌ 未配置
+2026-02-04 16:04:04 - SocialMediaMonitor - INFO - 开始社交媒体监控
+2026-02-04 16:04:04 - SocialMediaMonitor - WARNING - 微博API未启用，跳过获取热搜
+2026-02-04 16:04:04 - SocialMediaMonitor - WARNING - Twitter API未启用，跳过获取趋势
+2026-02-04 16:04:04 - SocialMediaMonitor - WARNING - Reddit API未启用，跳过获取热门帖子
+2026-02-04 16:04:04 - SocialMediaMonitor - INFO - 社交媒体监控完成，耗时: 0.0秒

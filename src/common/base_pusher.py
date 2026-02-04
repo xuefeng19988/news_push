@@ -13,7 +13,7 @@ from typing import Dict, List, Optional, Any, Tuple
 
 # 导入工具模块
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from utils.message_sender import send_whatsapp_message, get_whatsapp_number_display
+from utils.message_sender import send_whatsapp_message, send_wechat_message, send_message_all_platforms, get_whatsapp_number_display
 from utils.database import NewsDatabase
 from utils.config import ConfigManager
 from utils.logger import Logger
@@ -44,26 +44,105 @@ class BasePusher:
         
         self.logger.info(f"初始化 {name}")
     
-    def send_message(self, message: str, max_retries: int = 2) -> Tuple[bool, str]:
+    def send_message(self, message: str, max_retries: int = 2, platforms: Dict[str, bool] = None) -> Tuple[bool, str]:
         """
-        发送消息
+        发送消息到所有配置的平台
         
         Args:
             message: 消息内容
-            max_retries: 最大重试次数
+            max_retries: 最大重试次数 (仅WhatsApp)
+            platforms: 平台配置，默认发送到所有启用的平台
             
         Returns:
             Tuple[成功状态, 结果消息]
         """
         self.logger.info(f"准备发送消息 ({len(message)} 字符)")
-        success, result = send_whatsapp_message(message, max_retries=max_retries)
         
-        if success:
-            self.logger.info("消息发送成功")
+        # 获取环境配置
+        enable_whatsapp = self.env_config.get("ENABLE_WHATSAPP", "true").lower() == "true"
+        enable_wechat = self.env_config.get("ENABLE_WECHAT", "false").lower() == "true"
+        
+        # 默认平台配置
+        if platforms is None:
+            platforms = {
+                "whatsapp": enable_whatsapp,
+                "wechat": enable_wechat
+            }
+        
+        # 发送到所有启用的平台
+        results = send_message_all_platforms(message, platforms)
+        
+        # 分析结果
+        successful_platforms = []
+        failed_platforms = []
+        
+        for platform, (success, msg) in results.items():
+            if success:
+                successful_platforms.append(platform)
+                self.logger.info(f"{platform} 消息发送成功")
+            else:
+                failed_platforms.append(platform)
+                self.logger.warning(f"{platform} 消息发送失败: {msg}")
+        
+        # 返回总体结果
+        if successful_platforms:
+            success_msg = f"消息发送成功到: {', '.join(successful_platforms)}"
+            if failed_platforms:
+                success_msg += f" | 失败: {', '.join(failed_platforms)}"
+            return True, success_msg
         else:
-            self.logger.error(f"消息发送失败: {result}")
+            return False, f"所有平台发送失败: {', '.join(failed_platforms)}"
+    
+    def _get_whatsapp_number_display(self) -> str:
+        """
+        获取WhatsApp号码的显示格式（隐藏中间部分）
         
-        return success, result
+        Returns:
+            格式化后的号码显示
+        """
+        whatsapp_number = self.env_config.get("WHATSAPP_NUMBER", "")
+        if not whatsapp_number or whatsapp_number == "+86**********":
+            return "未配置"
+        
+        # 隐藏中间部分，保护隐私
+        if len(whatsapp_number) > 8:
+            return f"{whatsapp_number[:4]}...{whatsapp_number[-4:]}"
+        return whatsapp_number
+    
+    def check_system_health(self) -> Tuple[bool, str]:
+        """
+        检查系统健康状态
+        
+        Returns:
+            Tuple[是否健康, 健康报告]
+        """
+        try:
+            from monitoring.health_check import HealthChecker
+            
+            checker = HealthChecker()
+            report = checker.check_all()
+            
+            if report["overall_status"] == "healthy":
+                return True, f"系统健康状态良好 ({report['summary']['health_percentage']}%)"
+            else:
+                # 收集问题详情
+                problems = []
+                for check in report["checks"]:
+                    if check["status"] != "healthy":
+                        problems.append(f"{check['component']}: {check['message']}")
+                
+                problem_msg = " | ".join(problems[:3])  # 只显示前3个问题
+                if len(problems) > 3:
+                    problem_msg += f" ... 还有{len(problems)-3}个问题"
+                
+                return False, f"系统健康状态有问题 ({report['summary']['health_percentage']}%): {problem_msg}"
+                
+        except ImportError:
+            self.logger.warning("健康检查模块未安装，跳过健康检查")
+            return True, "健康检查模块未安装"
+        except Exception as e:
+            self.logger.error(f"健康检查失败: {e}")
+            return False, f"健康检查异常: {str(e)}"
     
     def is_within_push_hours(self, start_hour: int = 8, end_hour: int = 22) -> bool:
         """

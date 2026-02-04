@@ -413,7 +413,7 @@ class NewsStockPusherOptimized(BasePusher):
             "---",
             f"⏰ 推送时间: {timestamp}",
             f"⚡ 处理耗时: {self.format_duration(duration)}",
-            f"📱 接收号码: {get_whatsapp_number_display()}",
+            f"📱 接收号码: {self._get_whatsapp_number_display()}",
             f"🔧 系统状态: 运行正常"
         ]
         
@@ -434,6 +434,18 @@ class NewsStockPusherOptimized(BasePusher):
             是否成功
         """
         try:
+            # 推送前健康检查
+            self.logger.info("执行推送前健康检查...")
+            health_ok, health_msg = self.check_system_health()
+            
+            if not health_ok:
+                self.logger.warning(f"健康检查未通过: {health_msg}")
+                
+                # 发送健康告警
+                alert_message = f"⚠️ 推送系统健康告警\n{health_msg}\n\n系统将尝试继续推送，但可能失败。"
+                self.send_message(alert_message, platforms={"whatsapp": True})
+            
+            # 生成报告
             success, report = self.run()
             
             if not success:
@@ -449,6 +461,10 @@ class NewsStockPusherOptimized(BasePusher):
             if report.strip():
                 send_success, result_msg = self.send_message(report)
                 self.logger.info(f"发送结果: {result_msg}")
+                
+                # 记录推送统计
+                self._record_push_statistics(send_success, health_ok)
+                
                 return send_success
             else:
                 self.logger.warning("报告为空，不发送")
@@ -457,6 +473,55 @@ class NewsStockPusherOptimized(BasePusher):
         except Exception as e:
             self.logger.error(f"运行推送器异常: {e}")
             return False
+    
+    def _record_push_statistics(self, success: bool, health_ok: bool):
+        """
+        记录推送统计信息
+        
+        Args:
+            success: 推送是否成功
+            health_ok: 健康检查是否通过
+        """
+        try:
+            import json
+            from datetime import datetime
+            
+            stats_file = "logs/push_statistics.json"
+            
+            # 读取现有统计
+            stats = {}
+            if os.path.exists(stats_file):
+                with open(stats_file, 'r', encoding='utf-8') as f:
+                    stats = json.load(f)
+            
+            # 更新统计
+            date_str = datetime.now().strftime("%Y-%m-%d")
+            if date_str not in stats:
+                stats[date_str] = {
+                    "total_pushes": 0,
+                    "successful_pushes": 0,
+                    "failed_pushes": 0,
+                    "health_checks_passed": 0,
+                    "health_checks_failed": 0
+                }
+            
+            stats[date_str]["total_pushes"] += 1
+            if success:
+                stats[date_str]["successful_pushes"] += 1
+            else:
+                stats[date_str]["failed_pushes"] += 1
+            
+            if health_ok:
+                stats[date_str]["health_checks_passed"] += 1
+            else:
+                stats[date_str]["health_checks_failed"] += 1
+            
+            # 保存统计
+            with open(stats_file, 'w', encoding='utf-8') as f:
+                json.dump(stats, f, ensure_ascii=False, indent=2)
+                
+        except Exception as e:
+            self.logger.warning(f"记录推送统计失败: {e}")
         finally:
             self.cleanup()
 

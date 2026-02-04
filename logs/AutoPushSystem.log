@@ -1,0 +1,20 @@
+2026-02-04 15:39:32 - AutoPushSystem - INFO - 初始化 AutoPushSystem
+2026-02-04 15:39:32 - AutoPushSystem - INFO - 优化版自动推送系统初始化完成
+2026-02-04 15:39:32 - AutoPushSystem - INFO - 开始运行推送
+2026-02-04 15:39:51 - AutoPushSystem - INFO - 推送失败, 耗时: 19.2秒
+2026-02-04 16:00:01 - AutoPushSystem - INFO - 初始化 AutoPushSystem
+2026-02-04 16:00:01 - AutoPushSystem - INFO - 优化版自动推送系统初始化完成
+2026-02-04 16:00:01 - AutoPushSystem - INFO - 开始运行推送
+2026-02-04 16:00:21 - AutoPushSystem - INFO - 推送失败, 耗时: 19.7秒
+2026-02-04 16:03:11 - AutoPushSystem - INFO - 初始化 AutoPushSystem
+2026-02-04 16:03:11 - AutoPushSystem - INFO - 优化版自动推送系统初始化完成
+2026-02-04 16:03:11 - AutoPushSystem - INFO - 运行系统测试
+2026-02-04 16:03:11 - AutoPushSystem - ERROR - 保存文件失败: logs/logs/system_status_20260204_160311.txt - [Errno 2] No such file or directory: 'logs/logs/system_status_20260204_160311.txt'
+2026-02-04 16:03:11 - AutoPushSystem - INFO - 发送测试消息...
+2026-02-04 16:03:11 - AutoPushSystem - INFO - 准备发送消息 (42 字符)
+2026-02-04 16:03:11 - AutoPushSystem - WARNING - whatsapp 消息发送失败: 未配置WhatsApp号码，请设置WHATSAPP_NUMBER环境变量
+2026-02-04 16:03:11 - AutoPushSystem - ERROR - 测试消息发送失败: 所有平台发送失败: whatsapp
+2026-02-04 16:03:47 - AutoPushSystem - INFO - 初始化 AutoPushSystem
+2026-02-04 16:03:47 - AutoPushSystem - INFO - 优化版自动推送系统初始化完成
+2026-02-04 16:03:47 - AutoPushSystem - INFO - 开始运行推送
+2026-02-04 16:04:04 - AutoPushSystem - INFO - 推送失败, 耗时: 17.2秒

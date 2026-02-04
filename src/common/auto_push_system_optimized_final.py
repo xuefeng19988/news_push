@@ -11,6 +11,10 @@ from datetime import datetime
 from pathlib import Path
 
 # 导入工具模块
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
 from utils.config import ConfigManager, load_env_config
 from utils.logger import Logger, log_to_file
 from utils.database import NewsDatabase

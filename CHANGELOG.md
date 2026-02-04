@@ -251,3 +251,66 @@ python -m src.common.auto_push_system_optimized_final --status
 - 扩展更多消息推送平台
 - 添加用户个性化配置
 
+
+## [0.2.0] - 2026-02-04
+### 系统监控与健康检查
+- 🔧 **健康检查系统**: 完整的系统健康监控功能
+- 📊 **监控API**: RESTful健康检查API端点
+- 🛠️ **命令行工具**: `check_health.py` 健康检查工具
+- 📈 **推送前检查**: 自动在推送前执行健康检查
+- 🚨 **健康告警**: 系统异常时自动发送告警
+- 📝 **统计记录**: 推送成功率和健康检查统计
+
+### 新增功能
+1. **健康检查模块** (`src/monitoring/`)
+   - `health_check.py`: 系统健康检查器
+   - `health_api.py`: 健康检查API服务
+   - 检查数据库、新闻源、消息平台、系统资源
+
+2. **命令行工具**
+   - `check_health.py check`: 完整健康检查
+   - `check_health.py pre-push`: 推送前检查
+   - `check_health.py monitor`: 持续监控
+   - `check_health.py api`: 启动API服务器
+
+3. **集成到推送系统**
+   - 推送前自动健康检查
+   - 健康异常时发送告警
+   - 推送统计记录
+   - 系统状态监控
+
+### 技术改进
+- ✅ **数据库连接测试**: 新增test_connection方法
+- ✅ **系统资源监控**: CPU、内存、磁盘使用率
+- ✅ **新闻源监控**: 源可用性检查
+- ✅ **消息平台监控**: WhatsApp/微信连接检查
+- ✅ **错误处理**: 完善的异常处理和日志
+
+### 使用指南
+```bash
+# 健康检查
+python3 check_health.py check
+
+# 推送前检查
+python3 check_health.py pre-push
+
+# 启动监控API
+python3 check_health.py api --port 8080
+
+# 持续监控
+python3 check_health.py monitor --interval 300
+```
+
+### 监控端点
+- `GET /health` - 完整健康检查
+- `GET /health/database` - 数据库健康
+- `GET /health/whatsapp` - WhatsApp健康
+- `GET /health/wechat` - 微信健康
+- `GET /health/resources` - 系统资源
+
+### 下一步计划
+- 数据分析功能 (关键词提取、情感分析)
+- 可视化仪表板
+- 更多消息平台集成
+- 高级告警配置
+
