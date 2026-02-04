@@ -1,0 +1,34 @@
+{
+  "enabled": true,
+  "check_interval_minutes": 15,
+  "working_hours": {
+    "start": 8,
+    "end": 22
+  },
+  "twitter": {
+    "enabled": true,
+    "api_key": null,
+    "track_keywords": true,
+    "max_tweets": 20
+  },
+  "reddit": {
+    "enabled": true,
+    "client_id": null,
+    "client_secret": null,
+    "subreddits": [
+      "stocks",
+      "investing",
+      "technology",
+      "finance",
+      "CryptoCurrency"
+    ],
+    "max_posts": 20
+  },
+  "notification": {
+    "min_importance": 3,
+    "max_items": 5,
+    "channels": [
+      "whatsapp"
+    ]
+  }
+}

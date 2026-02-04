@@ -1,0 +1,73 @@
+{
+  "alerts": {
+    "阿里巴巴-W": {
+      "symbol": "09988.HK",
+      "alerts": [
+        {
+          "type": "price_above",
+          "value": 165.0,
+          "message": "阿里巴巴突破165港元"
+        },
+        {
+          "type": "price_below",
+          "value": 158.0,
+          "message": "阿里巴巴跌破158港元"
+        },
+        {
+          "type": "percent_change",
+          "value": 3.0,
+          "message": "阿里巴巴涨跌幅超过3%"
+        }
+      ]
+    },
+    "小米集团-W": {
+      "symbol": "01810.HK",
+      "alerts": [
+        {
+          "type": "price_above",
+          "value": 35.0,
+          "message": "小米突破35港元"
+        },
+        {
+          "type": "price_below",
+          "value": 34.0,
+          "message": "小米跌破34港元"
+        },
+        {
+          "type": "percent_change",
+          "value": 3.0,
+          "message": "小米涨跌幅超过3%"
+        }
+      ]
+    },
+    "比亚迪": {
+      "symbol": "002594.SZ",
+      "alerts": [
+        {
+          "type": "price_above",
+          "value": 88.0,
+          "message": "比亚迪突破88元"
+        },
+        {
+          "type": "price_below",
+          "value": 86.0,
+          "message": "比亚迪跌破86元"
+        },
+        {
+          "type": "percent_change",
+          "value": 3.0,
+          "message": "比亚迪涨跌幅超过3%"
+        }
+      ]
+    }
+  },
+  "enabled": true,
+  "notification_channels": [
+    "whatsapp"
+  ],
+  "check_interval_minutes": 5,
+  "working_hours": {
+    "start": 8,
+    "end": 22
+  }
+}
