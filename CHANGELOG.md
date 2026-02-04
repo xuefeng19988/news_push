@@ -63,3 +63,21 @@ python -m src.common.auto_push_system_optimized_final --status
 ### 备注
 这是项目的第一个正式版本，包含了完整的新闻+股票推送功能。
 系统已经过优化，代码结构清晰，易于维护和扩展。
+## [0.0.3] - 2026-02-04
+### 安全性改进
+- 🔒 **隐私保护**: 移除所有硬编码的API密钥和敏感信息
+- 🗂️ **文件清理**: 从Git中移除备份目录和.pyc文件
+- 📝 **配置管理**: 更新.gitignore，完善文件排除规则
+- 🛡️ **安全检查**: 添加隐私信息检查脚本
+- 🔧 **路径修复**: 修复硬编码路径，使用环境变量和相对路径
+
+### 修复
+- 修复示例手机号码显示问题
+- 修复配置文件中的null值
+- 更新文档中的示例路径
+
+### 新增工具
+- `scripts/check_privacy_issues.py`: 隐私信息检查工具
+- `scripts/fix_hardcoded_paths.py`: 硬编码路径修复工具
+- `scripts/cleanup_project.py`: 项目清理工具
+

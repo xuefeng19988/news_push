@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "news-push-system"
-version = "0.0.2"
+version = "0.0.3"
 description = "智能新闻+股票推送系统"
 readme = "README.md"
 authors = [
