@@ -160,9 +160,7 @@ cp alert_config.example.json alert_config.json
 ```
 
 
-- 代理名称: `ClawdAgent_1706937294`
 - 状态: ✅ 已认领
-- 功能: 社区分享、技术讨论、协作学习
 
 ## 🔒 安全最佳实践
 
