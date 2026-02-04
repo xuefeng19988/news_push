@@ -41,7 +41,7 @@ while [[ ! "$whatsapp_number" =~ ^\+[0-9]{10,15}$ ]]; do
 done
 
 # 获取OpenClaw路径
-read -p "请输入OpenClaw路径 [默认: /home/admin/.npm-global/bin/openclaw]: " openclaw_path
+read -p "请输入OpenClaw路径 [默认: /usr/local/bin/openclaw]: " openclaw_path
 openclaw_path=${openclaw_path:-"/usr/local/bin/openclaw"}
 
 # 更新配置文件

@@ -82,7 +82,7 @@ def setup_hourly_schedule():
     print(f"{'='*60}")
     
     # 创建定时任务命令
-    cron_command = "0 * * * * cd /home/admin/clawd && /usr/bin/python3 hourly_pusher.py >> /home/admin/clawd/hourly_pusher.log 2>&1"
+    cron_command = "0 * * * * cd . cd /home/admin/clawd && /usr/bin/python3 hourly_pusher.py >> /home/admin/clawd/hourly_pusher.log 2>&1cd /home/admin/clawd && /usr/bin/python3 hourly_pusher.py >> /home/admin/clawd/hourly_pusher.log 2>&1 /usr/bin/python3 hourly_pusher.py >> ./logs/hourly_pusher.log 2>cd /home/admin/clawd && /usr/bin/python3 hourly_pusher.py >> /home/admin/clawd/hourly_pusher.log 2>&11"
     
     try:
         # 获取现有crontab
