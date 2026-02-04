@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-02-04T15:26:57.380473",
+  "results": [
+    {
+      "name": "Yahoo Finance - Business",
+      "category": "财经媒体",
+      "url": "https://finance.yahoo.com/news/rssindex",
+      "success": true,
+      "message": "成功获取 42 篇文章",
+      "count": 42,
+      "elapsed": 0.8734772205352783
+    },
+    {
+      "name": "MarketWatch",
+      "category": "财经媒体",
+      "url": "http://feeds.marketwatch.com/marketwatch/topstories/",
+      "success": true,
+      "message": "成功获取 10 篇文章",
+      "count": 10,
+      "elapsed": 1.6027536392211914
+    },
+    {
+      "name": "Investing.com",
+      "category": "财经媒体",
+      "url": "https://www.investing.com/rss/news.rss",
+      "success": false,
+      "message": "解析错误",
+      "count": 0,
+      "elapsed": 1.7494773864746094
+    },
+    {
+      "name": "Seeking Alpha",
+      "category": "财经媒体",
+      "url": "https://seekingalpha.com/feed.xml",
+      "success": true,
+      "message": "成功获取 30 篇文章",
+      "count": 30,
+      "elapsed": 0.9359474182128906
+    },
+    {
+      "name": "东方财富",
+      "category": "中文财经",
+      "url": "http://finance.eastmoney.com/rss/rss.html",
+      "success": false,
+      "message": "解析错误",
+      "count": 0,
+      "elapsed": 1.0776870250701904
+    },
+    {
+      "name": "同花顺",
+      "category": "中文财经",
+      "url": "http://news.10jqka.com.cn/rss.html",
+      "success": false,
+      "message": "无文章内容",
+      "count": 0,
+      "elapsed": 0.11683821678161621
+    },
+    {
+      "name": "新浪财经",
+      "category": "中文财经",
+      "url": "http://finance.sina.com.cn/rss/",
+      "success": false,
+      "message": "解析错误",
+      "count": 0,
+      "elapsed": 0.22392535209655762
+    },
+    {
+      "name": "Medium - Technology",
+      "category": "知识社区",
+      "url": "https://medium.com/feed/tag/technology",
+      "success": true,
+      "message": "成功获取 10 篇文章",
+      "count": 10,
+      "elapsed": 0.8436410427093506
+    },
+    {
+      "name": "Medium - Business",
+      "category": "知识社区",
+      "url": "https://medium.com/feed/tag/business",
+      "success": true,
+      "message": "成功获取 10 篇文章",
+      "count": 10,
+      "elapsed": 0.7595779895782471
+    },
+    {
+      "name": "Reddit - r/finance",
+      "category": "知识社区",
+      "url": "https://www.reddit.com/r/finance/.rss",
+      "success": true,
+      "message": "成功获取 25 篇文章",
+      "count": 25,
+      "elapsed": 2.140178918838501
+    },
+    {
+      "name": "Reddit - r/investing",
+      "category": "知识社区",
+      "url": "https://www.reddit.com/r/investing/.rss",
+      "success": true,
+      "message": "成功获取 25 篇文章",
+      "count": 25,
+      "elapsed": 8.63219141960144
+    },
+    {
+      "name": "Reddit - r/technology",
+      "category": "知识社区",
+      "url": "https://www.reddit.com/r/technology/.rss",
+      "success": true,
+      "message": "成功获取 25 篇文章",
+      "count": 25,
+      "elapsed": 1.7172014713287354
+    },
+    {
+      "name": "Hacker News",
+      "category": "技术社区",
+      "url": "https://news.ycombinator.com/rss",
+      "success": true,
+      "message": "成功获取 30 篇文章",
+      "count": 30,
+      "elapsed": 1.3791930675506592
+    },
+    {
+      "name": "GitHub Trending",
+      "category": "技术社区",
+      "url": "https://github.com/trending.rss",
+      "success": false,
+      "message": "无文章内容",
+      "count": 0,
+      "elapsed": 1.0210318565368652
+    }
+  ]
+}

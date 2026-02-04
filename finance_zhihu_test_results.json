@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-02-04T15:25:45.993858",
+  "results": [
+    {
+      "name": "Bloomberg Markets",
+      "category": "财经媒体",
+      "url": "https://www.bloomberg.com/markets/rss",
+      "success": false,
+      "message": "解析错误: <unknown>:196:10: mismatched tag",
+      "count": 0
+    },
+    {
+      "name": "Reuters Business",
+      "category": "财经媒体",
+      "url": "http://feeds.reuters.com/reuters/businessNews",
+      "success": false,
+      "message": "异常: Remote end closed connection without response",
+      "count": 0
+    },
+    {
+      "name": "CNBC Business",
+      "category": "财经媒体",
+      "url": "https://www.cnbc.com/id/10001147/device/rss/rss.html",
+      "success": true,
+      "message": "成功获取 30 篇文章 (1.4秒)",
+      "count": 30
+    },
+    {
+      "name": "Financial Times",
+      "category": "财经媒体",
+      "url": "https://www.ft.com/business-education?format=rss",
+      "success": true,
+      "message": "成功获取 25 篇文章 (2.0秒)",
+      "count": 25
+    },
+    {
+      "name": "财新网-经济",
+      "category": "中文财经",
+      "url": "https://rss.caixin.com/economy/",
+      "success": false,
+      "message": "解析错误: <urlopen error [Errno -2] Name or service not known>",
+      "count": 0
+    },
+    {
+      "name": "第一财经",
+      "category": "中文财经",
+      "url": "http://www.yicai.com/rss",
+      "success": false,
+      "message": "解析错误: <unknown>:2:500: not well-formed (invalid token)",
+      "count": 0
+    },
+    {
+      "name": "华尔街见闻",
+      "category": "中文财经",
+      "url": "https://wallstreetcn.com/rss",
+      "success": false,
+      "message": "解析错误: <unknown>:2:2491: mismatched tag",
+      "count": 0
+    },
+    {
+      "name": "雪球热门",
+      "category": "中文财经",
+      "url": "https://xueqiu.com/hots/rss",
+      "success": false,
+      "message": "解析错误: <unknown>:2:124: junk after document element",
+      "count": 0
+    },
+    {
+      "name": "知乎日报",
+      "category": "知识社区",
+      "url": "https://www.zhihu.com/rss",
+      "success": false,
+      "message": "无文章内容",
+      "count": 0
+    },
+    {
+      "name": "知乎热门",
+      "category": "知识社区",
+      "url": "https://www.zhihu.com/explore/feed",
+      "success": false,
+      "message": "解析错误: <unknown>:249:0: not well-formed (invalid token)",
+      "count": 0
+    },
+    {
+      "name": "知乎专栏",
+      "category": "知识社区",
+      "url": "https://zhuanlan.zhihu.com/rss",
+      "success": false,
+      "message": "解析错误: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>",
+      "count": 0
+    },
+    {
+      "name": "豆瓣热门",
+      "category": "知识社区",
+      "url": "https://www.douban.com/feed/",
+      "success": false,
+      "message": "解析错误: <unknown>:33:2: mismatched tag",
+      "count": 0
+    },
+    {
+      "name": "简书热门",
+      "category": "知识社区",
+      "url": "https://www.jianshu.com/rss",
+      "success": false,
+      "message": "解析错误: <unknown>:160:67: not well-formed (invalid token)",
+      "count": 0
+    },
+    {
+      "name": "CSDN博客",
+      "category": "技术社区",
+      "url": "https://blog.csdn.net/rss.html",
+      "success": false,
+      "message": "解析错误: <unknown>:37:704: not well-formed (invalid token)",
+      "count": 0
+    },
+    {
+      "name": "SegmentFault",
+      "category": "技术社区",
+      "url": "https://segmentfault.com/blogs/rss",
+      "success": false,
+      "message": "解析错误: text/html; charset=utf-8 is not an XML media type",
+      "count": 0
+    }
+  ]
+}

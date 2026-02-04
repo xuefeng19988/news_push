@@ -109,6 +109,20 @@ class NewsStockPusherOptimized(BasePusher):
                 'category': '国际媒体'
             },
             
+            # 财经媒体 (新增)
+            {
+                'name': 'CNBC Business',
+                'type': 'rss',
+                'url': 'https://www.cnbc.com/id/10001147/device/rss/rss.html',
+                'category': '财经媒体'
+            },
+            {
+                'name': 'Financial Times Business',
+                'type': 'rss',
+                'url': 'https://www.ft.com/business-education?format=rss',
+                'category': '财经媒体'
+            },
+            
             # 科技媒体
             {
                 'name': 'TechCrunch',
@@ -135,6 +149,20 @@ class NewsStockPusherOptimized(BasePusher):
                 'type': 'rss',
                 'url': 'https://www.huxiu.com/rss/0.xml',
                 'category': '国内媒体'
+            },
+            
+            # 知识社区 (新增 - 使用Reddit作为替代)
+            {
+                'name': 'Reddit Finance',
+                'type': 'rss',
+                'url': 'https://www.reddit.com/r/finance/.rss',
+                'category': '知识社区'
+            },
+            {
+                'name': 'Reddit Technology',
+                'type': 'rss',
+                'url': 'https://www.reddit.com/r/technology/.rss',
+                'category': '知识社区'
             }
         ]
     
