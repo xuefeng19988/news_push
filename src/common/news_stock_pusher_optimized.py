@@ -65,39 +65,7 @@ class NewsStockPusherOptimized(BasePusher):
     def _load_news_sources(self) -> List[Dict[str, Any]]:
         """加载新闻源配置"""
         return [
-            # 国内新闻媒体
-            {
-                'name': '新浪新闻',
-                'type': 'rss',
-                'url': 'http://rss.sina.com.cn/news/marquee/ddt.xml',
-                'category': '国内媒体'
-            },
-            {
-                'name': '网易新闻',
-                'type': 'rss', 
-                'url': 'http://news.163.com/special/00011K6L/rss_newsattitude.xml',
-                'category': '国内媒体'
-            },
-            {
-                'name': '凤凰新闻',
-                'type': 'rss',
-                'url': 'https://news.ifeng.com/rss/ifengnews.xml',
-                'category': '国内媒体'
-            },
-            {
-                'name': '澎湃新闻',
-                'type': 'rss',
-                'url': 'https://www.thepaper.cn/rss_hot.jsp',
-                'category': '国内媒体'
-            },
-            {
-                'name': '今日头条热榜',
-                'type': 'api',
-                'url': 'https://www.toutiao.com/hot-event/hot-board/',
-                'category': '社交媒体'
-            },
-            
-            # 国际新闻媒体
+            # 国际新闻媒体 (已验证有效)
             {
                 'name': 'BBC中文网',
                 'type': 'rss',
@@ -133,6 +101,40 @@ class NewsStockPusherOptimized(BasePusher):
                 'type': 'rss',
                 'url': 'https://www.scmp.com/rss/91/feed',
                 'category': '国际媒体'
+            },
+            {
+                'name': '华尔街日报',
+                'type': 'rss',
+                'url': 'https://feeds.a.dj.com/rss/RSSWorldNews.xml',
+                'category': '国际媒体'
+            },
+            
+            # 科技媒体
+            {
+                'name': 'TechCrunch',
+                'type': 'rss',
+                'url': 'http://feeds.feedburner.com/TechCrunch/',
+                'category': '科技媒体'
+            },
+            {
+                'name': 'Wired',
+                'type': 'rss',
+                'url': 'https://www.wired.com/feed/rss',
+                'category': '科技媒体'
+            },
+            
+            # 国内媒体 (已验证有效)
+            {
+                'name': '36氪',
+                'type': 'rss',
+                'url': 'https://www.36kr.com/feed',
+                'category': '国内媒体'
+            },
+            {
+                'name': '虎嗅',
+                'type': 'rss',
+                'url': 'https://www.huxiu.com/rss/0.xml',
+                'category': '国内媒体'
             }
         ]
     

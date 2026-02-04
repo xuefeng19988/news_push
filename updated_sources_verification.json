@@ -1,0 +1,108 @@
+{
+  "timestamp": "2026-02-04T15:21:41.490712",
+  "total_sources": 11,
+  "successful_sources": 11,
+  "failed_sources": 0,
+  "total_articles": 372,
+  "results": [
+    {
+      "name": "BBC中文网",
+      "category": "国际媒体",
+      "url": "https://www.bbc.com/zhongwen/simp/index.xml",
+      "success": true,
+      "message": "成功获取 38 篇文章",
+      "count": 38,
+      "elapsed": 1.6556899547576904
+    },
+    {
+      "name": "BBC World",
+      "category": "国际媒体",
+      "url": "http://feeds.bbci.co.uk/news/world/rss.xml",
+      "success": true,
+      "message": "成功获取 34 篇文章",
+      "count": 34,
+      "elapsed": 1.2466189861297607
+    },
+    {
+      "name": "CNN国际版",
+      "category": "国际媒体",
+      "url": "http://rss.cnn.com/rss/edition.rss",
+      "success": true,
+      "message": "成功获取 50 篇文章",
+      "count": 50,
+      "elapsed": 1.402733325958252
+    },
+    {
+      "name": "金融时报中文网",
+      "category": "国际媒体",
+      "url": "https://www.ftchinese.com/rss/feed",
+      "success": true,
+      "message": "成功获取 20 篇文章",
+      "count": 20,
+      "elapsed": 0.8063337802886963
+    },
+    {
+      "name": "日经亚洲",
+      "category": "国际媒体",
+      "url": "https://asia.nikkei.com/rss/feed/nar",
+      "success": true,
+      "message": "成功获取 50 篇文章",
+      "count": 50,
+      "elapsed": 0.583460807800293
+    },
+    {
+      "name": "南华早报",
+      "category": "国际媒体",
+      "url": "https://www.scmp.com/rss/91/feed",
+      "success": true,
+      "message": "成功获取 50 篇文章",
+      "count": 50,
+      "elapsed": 1.5386078357696533
+    },
+    {
+      "name": "华尔街日报",
+      "category": "国际媒体",
+      "url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
+      "success": true,
+      "message": "成功获取 20 篇文章",
+      "count": 20,
+      "elapsed": 1.091261863708496
+    },
+    {
+      "name": "TechCrunch",
+      "category": "科技媒体",
+      "url": "http://feeds.feedburner.com/TechCrunch/",
+      "success": true,
+      "message": "成功获取 21 篇文章",
+      "count": 21,
+      "elapsed": 1.7517805099487305
+    },
+    {
+      "name": "Wired",
+      "category": "科技媒体",
+      "url": "https://www.wired.com/feed/rss",
+      "success": true,
+      "message": "成功获取 50 篇文章",
+      "count": 50,
+      "elapsed": 0.5481381416320801
+    },
+    {
+      "name": "36氪",
+      "category": "国内媒体",
+      "url": "https://www.36kr.com/feed",
+      "success": true,
+      "message": "成功获取 30 篇文章",
+      "count": 30,
+      "elapsed": 0.5886642932891846
+    },
+    {
+      "name": "虎嗅",
+      "category": "国内媒体",
+      "url": "https://www.huxiu.com/rss/0.xml",
+      "success": true,
+      "message": "成功获取 9 篇文章",
+      "count": 9,
+      "elapsed": 0.35819292068481445
+    }
+  ]
+}
