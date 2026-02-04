@@ -99,3 +99,21 @@ python -m src.common.auto_push_system_optimized_final --status
 - `SETUP_GITIGNORE.md`: 本地.gitignore设置指南
 - `.gitignore.local`: 本地.gitignore模板文件
 
+
+## [0.0.5] - 2026-02-04
+### 文档清理
+- 🧹 **文件清理**: 清理根目录下的.md文件，只保留项目相关文档
+- 📋 **文档优化**: 移除临时报告和本地配置指南
+- 🏷️ **版本管理**: 更新版本到v0.0.5
+
+### 移除的文件
+- `privacy_check_report.md` - 隐私检查报告（临时文件）
+- `SETUP_GITIGNORE.md` - Git忽略设置指南（本地配置）
+
+### 保留的项目文档
+- `README.md` - 主文档
+- `CHANGELOG.md` - 版本更新日志  
+- `CODE_OPTIMIZATION_SUMMARY.md` - 代码优化总结
+- `PROJECT_STRUCTURE.md` - 项目结构文档
+- `PROJECT_STRUCTURE_OPTIMIZED.md` - 优化项目结构文档
+
