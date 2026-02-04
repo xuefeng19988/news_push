@@ -381,7 +381,7 @@ def main():
         
         # 保存报告
         timestamp = datetime.now().strftime('%Y%m%d_%H%M')
-        report_file = f"/home/admin/clawd/social_report_{timestamp}.txt"
+        report_file = f"./logs/social_report_{timestamp}.txt"
         
         with open(report_file, 'w', encoding='utf-8') as f:
             f.write(report)

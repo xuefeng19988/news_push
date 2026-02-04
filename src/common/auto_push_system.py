@@ -136,7 +136,7 @@ def setup_cron_job():
     print("⏰ 设置定时任务...")
     
     # 每小时运行一次
-    cron_command = "0 * * * * cd /home/admin/clawd && /usr/bin/python3 auto_push_system.py --run >> /home/admin/clawd/auto_push.log 2>&1"
+    cron_command = "0 * * * * cd /home/admin/clawd && /usr/bin/python3 auto_push_system.py --run >> ./logs/auto_push.log 2>&1"
     
     try:
         # 获取当前crontab

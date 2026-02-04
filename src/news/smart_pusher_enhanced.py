@@ -64,7 +64,7 @@ def send_whatsapp_message(message: str) -> bool:
             
             # 保存到文件备用
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            message_file = f"/home/admin/clawd/backup_msg_{timestamp}.txt"
+            message_file = f"./logs/backup_msg_{timestamp}.txt"
             
             with open(message_file, 'w', encoding='utf-8') as f:
                 f.write(message)
@@ -125,7 +125,7 @@ def run_news_pusher():
             if send_success:
                 # 保存发送记录
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-                sent_file = f"/home/admin/clawd/sent_news_{timestamp}.txt"
+                sent_file = f"./logs/sent_news_{timestamp}.txt"
                 with open(sent_file, 'w', encoding='utf-8') as f:
                     f.write(news_message)
             

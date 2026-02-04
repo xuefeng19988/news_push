@@ -651,7 +651,7 @@ class GlobalNewsPusher:
             
             # 保存消息到文件
             timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-            message_file = f"/home/admin/clawd/news_message_{timestamp}.txt"
+            message_file = f"./logs/news_message_{timestamp}.txt"
             
             with open(message_file, 'w', encoding='utf-8') as f:
                 f.write(message)
@@ -659,7 +659,7 @@ class GlobalNewsPusher:
             logger.info(f"✅ 新闻消息已保存: {message_file}")
             
             # 同时保存到待发送队列
-            pending_file = f"/home/admin/clawd/pending_news_{timestamp}.txt"
+            pending_file = f"./logs/pending_news_{timestamp}.txt"
             with open(pending_file, 'w', encoding='utf-8') as f:
                 f.write(message)
             

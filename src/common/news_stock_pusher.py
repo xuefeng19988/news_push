@@ -24,7 +24,7 @@ class NewsStockPusher:
         })
         
         # 数据库路径
-        self.db_path = "/home/admin/clawd/news_cache.db"
+        self.db_path = "./news_cache.db"  # 数据库文件路径
         self.init_database()
         
         # 监控的股票
@@ -1007,7 +1007,7 @@ class NewsStockPusher:
     def save_report(self, report: str):
         """保存报告"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M')
-        report_file = f"/home/admin/clawd/push_report_{timestamp}.txt"
+        report_file = f"./logs/push_report_{timestamp}.txt"
         
         with open(report_file, 'w', encoding='utf-8') as f:
             f.write(report)

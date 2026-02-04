@@ -372,7 +372,7 @@ class NewsPusher:
     def save_news_report(self, report: str):
         """保存新闻报告"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M')
-        report_file = f"/home/admin/clawd/news_report_{timestamp}.txt"
+        report_file = f"./logs/news_report_{timestamp}.txt"
         
         with open(report_file, 'w', encoding='utf-8') as f:
             f.write(report)
@@ -430,7 +430,7 @@ def send_whatsapp_news(news_report: str):
     try:
         # 保存到待发送文件
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        pending_file = f"/home/admin/clawd/pending_news_{timestamp}.txt"
+        pending_file = f"./logs/pending_news_{timestamp}.txt"
         
         with open(pending_file, 'w', encoding='utf-8') as f:
             f.write(news_report)

@@ -362,7 +362,7 @@ class SocialMediaMonitor:
                 
                 # 保存摘要文件
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-                summary_file = f"{self.data_dir}/social_summary_{timestamp}.txt"
+                summary_file = f"./logs/social_summary_{timestamp}.txt"
                 
                 with open(summary_file, 'w', encoding='utf-8') as f:
                     f.write(summary)

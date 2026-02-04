@@ -53,7 +53,7 @@ check_status() {
     
     # 检查日志文件
     echo "📝 日志文件:"
-    LOG_FILE="logs/auto_push.log"
+    LOG_FILE="logs/logs/auto_push.log"
     if [ -f "$LOG_FILE" ]; then
         SIZE=$(stat -c%s "$LOG_FILE")
         MTIME=$(stat -c%y "$LOG_FILE" | cut -d' ' -f1,2)
@@ -159,7 +159,7 @@ view_log() {
     echo "📝 查看日志..."
     echo ""
     
-    LOG_FILE="logs/auto_push.log"
+    LOG_FILE="logs/logs/auto_push.log"
     
     if [ -f "$LOG_FILE" ]; then
         echo "最后20行日志:"
