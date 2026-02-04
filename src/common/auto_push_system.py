@@ -1,253 +1,145 @@
-import os
 #!/usr/bin/env python3
 """
-自动推送系统 - 集成新闻和股票推送，自动发送到WhatsApp
+自动推送系统 - 更新版，使用工具模块
 """
 
 import os
 import sys
-import subprocess
-from datetime import datetime
 import time
+from datetime import datetime
+from pathlib import Path
 
-def send_whatsapp_message(message: str) -> bool:
-    """发送消息到WhatsApp"""
-    try:
-        print(f"📤 发送消息 ({len(message)}字符)...")
-        
-        # 使用openclaw发送消息
-        cmd = [
-            '/home/admin/.npm-global/bin/openclaw', 'message', 'send',
-            '-t', os.getenv("WHATSAPP_NUMBER", "+86**********"),  # 从环境变量读取
-            '-m', message
-        ]
-        
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-        
-        if result.returncode == 0:
-            print("✅ 消息发送成功")
-            return True
-        else:
-            print(f"❌ 发送失败: {result.stderr[:200]}")
-            
-            # 保存到文件备用
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            message_file = f"/home/admin/clawd/failed_msg_{timestamp}.txt"
-            
-            with open(message_file, 'w', encoding='utf-8') as f:
-                f.write(message)
-            
-            print(f"📝 消息已备份: {message_file}")
-            return False
-        
-    except Exception as e:
-        print(f"❌ 发送消息失败: {e}")
-        return False
+# 添加utils到路径
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from utils.message_sender import send_whatsapp_message, get_whatsapp_number_display
+from utils.logger import log_to_file
 
 def run_news_stock_push() -> str:
     """运行新闻+股票推送，返回报告内容"""
     try:
         print("🚀 运行新闻+股票推送系统...")
         
-        # 导入推送系统
-        sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-        from news_stock_pusher import NewsStockPusher
+        # 导入优化版推送器
+        from news_stock_pusher_optimized import NewsStockPusherOptimized
         
-        pusher = NewsStockPusher()
-        report = pusher.run()
+        pusher = NewsStockPusherOptimized()
+        success, report = pusher.run()
         
-        if report:
+        if success:
+            print(f"✅ 报告生成成功 ({len(report)}字符)")
             return report
         else:
-            return "❌ 推送系统运行失败"
-            
+            print("❌ 报告生成失败")
+            return "报告生成失败，请检查系统状态。"
+        
     except Exception as e:
         print(f"❌ 运行推送系统失败: {e}")
-        return f"❌ 系统错误: {str(e)}"
+        return f"系统运行异常: {e}"
 
-def should_push_stocks() -> bool:
-    """是否应该推送股票 (08:00-18:00)"""
-    hour = datetime.now().hour
-    return 8 <= hour <= 18  # 8点到18点之间
-
-def should_push_news() -> bool:
-    """是否应该推送新闻 (08:00-22:00)"""
-    hour = datetime.now().hour
-    return 8 <= hour <= 22  # 8点到22点之间
-
-def generate_system_status() -> str:
-    """生成系统状态报告"""
-    current_time = datetime.now().strftime('%H:%M')
-    
-    status = f"🖥️ **系统状态报告** ({current_time})\n\n"
-    
-    # 时间检查
-    stocks_enabled = should_push_stocks()
-    news_enabled = should_push_news()
-    
-    status += f"⏰ **时间检查**\n"
-    status += f"• 当前时间: {current_time}\n"
-    status += f"• 股票推送: {'✅ 启用' if stocks_enabled else '⏭️ 暂停'} (08:00-18:00)\n"
-    status += f"• 新闻推送: {'✅ 启用' if news_enabled else '⏭️ 暂停'} (08:00-22:00)\n\n"
-    
-    # 文件检查
-    status += f"📁 **文件检查**\n"
-    
-    important_files = [
-        ("news_stock_pusher.py", "推送主程序"),
-        ("auto_push_system.py", "自动推送脚本"),
-        ("news_cache.db", "新闻数据库"),
-        ("alert_config.json", "预警配置")
-    ]
-    
-    for filename, description in important_files:
-        filepath = f"/home/admin/clawd/{filename}"
-        if os.path.exists(filepath):
-            size = os.path.getsize(filepath)
-            status += f"• {description}: ✅ {size:,} 字节\n"
-        else:
-            status += f"• {description}: ❌ 文件不存在\n"
-    
-    # 最近推送记录
-    status += f"\n📊 **最近推送**\n"
-    
-    push_patterns = [
-        ("push_report_", "推送报告"),
-        ("sent_news_", "新闻发送"),
-        ("sent_stock_", "股票发送")
-    ]
-    
-    for pattern, description in push_patterns:
-        files = [f for f in os.listdir('/home/admin/clawd') if f.startswith(pattern)]
-        if files:
-            latest = max(files)
-            status += f"• {description}: {len(files)} 条记录\n"
-        else:
-            status += f"• {description}: 📭 无记录\n"
-    
-    status += f"\n🔄 **下次运行**: 整点自动推送\n"
-    status += f"📱 **接收号码**: +86**********\n"
-    status += f"⚙️ **系统版本**: 自动推送系统 v1.0\n"
-    
-    return status
-
-def setup_cron_job():
-    """设置定时任务"""
-    print("⏰ 设置定时任务...")
-    
-    # 每小时运行一次
-    cron_command = "0 * * * * cd /home/admin/clawd && /usr/bin/python3 auto_push_system.py --run >> ./logs/auto_push.log 2>&1"
-    
+def run_simple_push() -> str:
+    """运行简单推送系统"""
     try:
-        # 获取当前crontab
-        result = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
-        current_cron = result.stdout
+        print("🔄 运行简单推送系统...")
         
-        # 检查是否已存在
-        if "auto_push_system.py" in current_cron:
-            print("✅ 定时任务已存在")
-            return True
+        # 导入简单推送系统
+        from simple_push_system import generate_simple_report
         
-        # 添加新任务
-        new_cron = current_cron.strip() + "\n" + cron_command + "\n"
-        
-        with subprocess.Popen(['crontab', '-'], stdin=subprocess.PIPE, text=True) as proc:
-            proc.stdin.write(new_cron)
-            proc.stdin.close()
-        
-        print("✅ 定时任务设置完成")
-        print(f"任务: {cron_command}")
-        
-        print("\n📅 推送安排:")
-        print("  股票推送: 08:00-18:00 (每小时)")
-        print("  新闻推送: 08:00-22:00 (每小时)")
-        print("  推送方式: WhatsApp自动发送")
-        
-        return True
+        report = generate_simple_report()
+        print(f"✅ 简单报告生成成功 ({len(report)}字符)")
+        return report
         
     except Exception as e:
-        print(f"❌ 设置定时任务失败: {e}")
-        return False
+        print(f"❌ 运行简单推送失败: {e}")
+        return f"简单推送异常: {e}"
 
 def main():
     """主函数"""
-    import argparse
+    print("=" * 60)
+    print("📱 自动推送系统")
+    print("=" * 60)
     
-    parser = argparse.ArgumentParser(description="自动推送系统")
-    parser.add_argument('--setup', action='store_true', help='设置定时任务')
-    parser.add_argument('--run', action='store_true', help='运行推送')
-    parser.add_argument('--status', action='store_true', help='检查系统状态')
-    parser.add_argument('--test', action='store_true', help='测试消息发送')
+    start_time = time.time()
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
     
-    args = parser.parse_args()
+    # 检查命令行参数
+    if len(sys.argv) > 1 and sys.argv[1] == "--run":
+        print("⏰ 定时任务模式")
+        auto_mode = True
+    else:
+        print("👤 手动运行模式")
+        auto_mode = False
     
-    print(f"\n{'='*60}")
-    print(f"🚀 自动推送系统")
-    print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"{'='*60}")
+    # 1. 尝试运行主推送系统
+    print("\n1. 运行主推送系统...")
+    report = run_news_stock_push()
     
-    if args.setup:
-        return setup_cron_job()
-    
-    if args.status:
-        status_report = generate_system_status()
-        print(f"\n{status_report}")
+    # 2. 如果报告太短或失败，使用简单推送
+    if len(report) < 100 or "失败" in report or "异常" in report:
+        print("\n⚠️  主系统报告不完整，尝试简单推送...")
+        simple_report = run_simple_push()
         
-        # 发送状态报告
-        send_whatsapp_message(status_report)
-        return True
-    
-    if args.test:
-        print("🧪 测试消息发送...")
-        test_msg = "🔧 **系统测试消息**\n\n✅ 自动推送系统测试成功\n⏰ " + datetime.now().strftime("%H:%M:%S")
-        return send_whatsapp_message(test_msg)
-    
-    if args.run:
-        print("🔄 运行自动推送...")
-        
-        # 检查时间
-        stocks_enabled = should_push_stocks()
-        news_enabled = should_push_news()
-        
-        print(f"\n⏰ 时间检查:")
-        print(f"  股票推送: {'✅' if stocks_enabled else '⏭️'}")
-        print(f"  新闻推送: {'✅' if news_enabled else '⏭️'}")
-        
-        # 运行推送
-        if stocks_enabled or news_enabled:
-            report = run_news_stock_push()
-            
-            if report and not report.startswith("❌"):
-                # 发送报告
-                success = send_whatsapp_message(report)
-                
-                if success:
-                    # 保存发送记录
-                    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-                    sent_file = f"/home/admin/clawd/sent_push_{timestamp}.txt"
-                    with open(sent_file, 'w', encoding='utf-8') as f:
-                        f.write(report)
-                    
-                    print(f"💾 发送记录已保存: {sent_file}")
-                
-                return success
-            else:
-                print(f"❌ 推送失败: {report}")
-                return False
+        if len(simple_report) > 50:
+            report = simple_report
+            print("✅ 使用简单推送报告")
         else:
-            print("⏭️ 非推送时间，跳过")
-            return True
+            print("❌ 简单推送也失败")
     
-    # 默认显示帮助
-    print("\n📋 可用命令:")
-    print("  --setup   设置定时任务（每小时运行）")
-    print("  --run     立即运行推送")
-    print("  --status  检查系统状态")
-    print("  --test    测试消息发送")
-    print(f"\n{'='*60}")
+    # 3. 发送报告
+    print(f"\n2. 发送报告 ({len(report)}字符)...")
     
-    return True
+    if report and len(report) > 50:
+        success, result_msg = send_whatsapp_message(report, max_retries=2)
+        
+        if success:
+            print(f"✅ {result_msg}")
+            
+            # 记录成功
+            log_entry = f"推送成功: {len(report)}字符"
+            log_to_file(log_entry, f"auto_push_{timestamp}.txt")
+            
+            # 保存报告
+            report_file = f"logs/auto_push_report_{timestamp}.txt"
+            with open(report_file, 'w', encoding='utf-8') as f:
+                f.write(report)
+            print(f"📝 报告保存到: {report_file}")
+            
+        else:
+            print(f"❌ {result_msg}")
+            
+            # 记录失败
+            log_entry = f"推送失败: {result_msg}"
+            log_to_file(log_entry, f"auto_push_failed_{timestamp}.txt")
+            
+            # 保存失败报告
+            report_file = f"logs/auto_push_failed_{timestamp}.txt"
+            with open(report_file, 'w', encoding='utf-8') as f:
+                f.write(report)
+            print(f"📝 失败报告保存到: {report_file}")
+            
+    else:
+        print("❌ 报告内容无效，不发送")
+    
+    # 4. 显示统计信息
+    duration = time.time() - start_time
+    print(f"\n3. 统计信息:")
+    print(f"   ⏱️  总耗时: {duration:.1f}秒")
+    print(f"   📄 报告长度: {len(report)}字符")
+    print(f"   📱 接收号码: {get_whatsapp_number_display()}")
+    print(f"   🕐 完成时间: {datetime.now().strftime('%H:%M:%S')}")
+    
+    # 5. 记录到日志文件
+    log_file = "logs/auto_push.log"
+    log_entry = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] "
+    log_entry += f"报告:{len(report)}字符 耗时:{duration:.1f}秒 "
+    log_entry += f"号码:{get_whatsapp_number_display()}\n"
+    
+    with open(log_file, 'a', encoding='utf-8') as f:
+        f.write(log_entry)
+    
+    print(f"\n📝 日志记录到: {log_file}")
+    print("=" * 60)
+    
+    return 0
 
 if __name__ == "__main__":
-    success = main()
-    sys.exit(0 if success else 1)
+    sys.exit(main())

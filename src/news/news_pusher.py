@@ -5,6 +5,7 @@
 """
 
 import requests
+from utils.database import NewsDatabase
 import json
 import time
 import hashlib

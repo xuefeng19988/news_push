@@ -5,14 +5,16 @@
 """
 
 import os
+from utils.config import ConfigManager, load_env_config
+from utils.message_sender import send_whatsapp_message, get_whatsapp_number_display
 import sys
 import subprocess
 import datetime
 from pathlib import Path
 
 # 从环境变量获取配置
-WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "+86**********")  # 从环境变量读取
-OPENCLAW_PATH = os.getenv("OPENCLAW_PATH", "/home/admin/.npm-global/bin/openclaw")
+# WHATSAPP_NUMBER配置 - 使用utils.config统一管理
+# OPENCLAW_PATH配置 - 使用utils.config统一管理
 
 def send_whatsapp_message(message):
     """发送WhatsApp消息"""

@@ -5,6 +5,7 @@
 """
 
 import os
+from utils.database import NewsDatabase
 import sys
 import json
 import time

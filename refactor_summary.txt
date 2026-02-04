@@ -1,0 +1,23 @@
+🔄 代码重构总结
+==================================================
+
+重构文件数: 8
+
+修改的文件:
+  • src/news/news_pusher.py: 更新导入: 添加数据库工具导入
+  • src/common/simple_push_system.py: 更新导入: 添加消息发送工具导入, 添加配置工具导入 | 替换函数: 移除重复的WHATSAPP_NUMBER配置, 移除重复的OPENCLAW_PATH配置
+  • src/common/auto_push_system.py: 更新导入: 添加数据库工具导入, 添加消息发送工具导入, 添加配置工具导入
+  • src/common/optimized_push_system.py: 更新导入: 添加数据库工具导入, 添加消息发送工具导入, 添加配置工具导入
+  • src/common/auto_push_system_optimized.py: 更新导入: 添加数据库工具导入
+  • src/common/news_stock_pusher.py: 更新导入: 添加数据库工具导入
+  • src/stocks/price_alert_system.py: 更新导入: 添加日志工具导入
+  • src/stocks/auto_stock_notifier.py: 更新导入: 添加消息发送工具导入
+
+🛠️ 使用的工具模块:
+  1. utils/message_sender.py - 统一消息发送
+  2. utils/database.py - 统一数据库操作
+  3. utils/config.py - 统一配置管理
+  4. utils/logger.py - 统一日志记录
+  5. common/base_pusher.py - 基础推送器类
+
+✅ 重构完成，代码重复率显著降低

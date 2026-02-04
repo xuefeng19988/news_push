@@ -4,6 +4,7 @@
 """
 
 import os
+from utils.logger import Logger, setup_logger, log_to_file
 import json
 import time
 from datetime import datetime, timedelta
