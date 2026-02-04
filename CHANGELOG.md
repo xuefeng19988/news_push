@@ -117,3 +117,18 @@ python -m src.common.auto_push_system_optimized_final --status
 - `PROJECT_STRUCTURE.md` - 项目结构文档
 - `PROJECT_STRUCTURE_OPTIMIZED.md` - 优化项目结构文档
 
+
+## [0.0.6] - 2026-02-04
+### 彻底清理
+- 🗑️ **文件清理**: 删除所有.gitignore相关文件和.toml文件
+- 🧹 **本地清理**: 确保项目根目录干净，只保留必要文件
+- 📦 **仓库纯净**: Git仓库只包含源代码和文档
+
+### 移除的文件
+- `.gitignore` - Git忽略配置（用户自行创建）
+- `.gitignore.local` - Git忽略模板
+- `pyproject.toml` - Python项目配置
+
+### 使用说明
+用户需要根据项目需求自行创建.gitignore文件，或使用系统默认配置。
+
