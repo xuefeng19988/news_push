@@ -225,3 +225,55 @@ MIT License
 ---
 
 *文档结束*
+
+## 🏗️ 优化后的代码结构
+
+### 统一工具模块 (`src/utils/`)
+为了消除重复代码，创建了统一的工具模块：
+
+1. **`message_sender.py`** - 统一的消息发送功能
+   - 消除多个文件中的`send_whatsapp_message`重复实现
+   - 支持重试、超时配置
+   - 统一的错误处理
+
+2. **`database.py`** - 统一的数据库管理
+   - 新闻去重数据库操作
+   - 股票数据存储
+   - 自动清理旧记录
+
+3. **`config.py`** - 统一的配置管理
+   - 环境变量管理
+   - 配置文件加载和验证
+   - 默认配置生成
+
+4. **`logger.py`** - 统一的日志管理
+   - 标准化的日志格式
+   - 文件和控制台输出
+   - 日志轮转支持
+
+### 优化后的主程序
+- **`main_optimized.py`** - 统一的主程序，整合所有功能
+- **`news_stock_pusher_optimized.py`** - 优化的新闻股票推送器
+- **`auto_push_system_optimized.py`** - 优化的自动推送系统
+
+### 代码重复消除统计
+- **消除重复函数**: 5个不同的`send_whatsapp_message`实现
+- **统一配置管理**: 3个配置文件统一管理
+- **标准化日志**: 多个日志实现统一
+- **数据库操作**: 重复的SQLite操作统一
+
+### 使用优化版本
+```bash
+# 使用统一的主程序
+python main_optimized.py --status    # 查看系统状态
+python main_optimized.py --news      # 运行新闻推送
+python main_optimized.py --stock     # 运行股票推送
+python main_optimized.py --simple    # 运行简单推送
+
+# 使用优化的推送系统
+python src/common/auto_push_system_optimized.py --run
+python src/common/news_stock_pusher_optimized.py
+```
+
+### 向后兼容
+旧版本代码仍然保留，可以逐步迁移到新版本。
