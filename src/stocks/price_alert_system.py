@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class PriceAlertSystem:
     """价格预警系统"""
     
-    def __init__(self, config_file: str = "/home/admin/clawd/alert_config.json"):
+    def __init__(self, config_file: str = "./logs/alert_config.json"):
         self.config_file = config_file
         
         # 默认预警配置
@@ -50,7 +50,7 @@ class PriceAlertSystem:
         }
         
         self.alerts_config = self.load_config()
-        self.alert_history_file = "/home/admin/clawd/alert_history.json"
+        self.alert_history_file = "./logs/alert_history.json"
         self.alert_history = self.load_alert_history()
         
         # 预警冷却时间 (避免重复预警)

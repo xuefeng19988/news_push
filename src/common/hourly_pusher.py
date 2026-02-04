@@ -58,7 +58,7 @@ def run_news_pusher():
             
             # 保存到待发送队列
             timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-            pending_file = f"/home/admin/clawd/pending_news_{timestamp}.txt"
+            pending_file = f"./logs/pending_news_{timestamp}.txt"
             with open(pending_file, 'w', encoding='utf-8') as f:
                 f.write(news_message)
             
@@ -110,7 +110,7 @@ def setup_hourly_schedule():
         print(f"任务内容: {cron_command}")
         
         # 创建日志文件
-        log_file = "/home/admin/clawd/hourly_pusher.log"
+        log_file = "./logs/hourly_pusher.log"
         with open(log_file, 'a') as f:
             f.write(f"\n{'='*60}\n")
             f.write(f"每小时推送系统启动 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
@@ -156,7 +156,7 @@ def send_summary_notification(stock_success: bool, news_success: bool):
     summary += "- 监控频率: 每小时一次\n"
     
     # 保存总结
-    summary_file = f"/home/admin/clawd/push_summary_{datetime.now().strftime('%Y%m%d_%H%M')}.txt"
+    summary_file = f"./logs/push_summary_{datetime.now().strftime('%Y%m%d_%H%M')}.txt"
     with open(summary_file, 'w', encoding='utf-8') as f:
         f.write(summary)
     

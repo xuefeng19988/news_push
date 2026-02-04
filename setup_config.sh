@@ -34,15 +34,15 @@ echo "📝 请填写以下配置信息:"
 echo ""
 
 # 获取WhatsApp号码
-read -p "请输入你的WhatsApp号码 (例如: +8612345678900): " whatsapp_number
+read -p "请输入你的WhatsApp号码 (例如: +86123****8900): " whatsapp_number
 while [[ ! "$whatsapp_number" =~ ^\+[0-9]{10,15}$ ]]; do
     echo "❌ 号码格式不正确，请使用国际格式: +国家代码手机号"
-    read -p "请输入你的WhatsApp号码 (例如: +8612345678900): " whatsapp_number
+    read -p "请输入你的WhatsApp号码 (例如: +86123****8900): " whatsapp_number
 done
 
 # 获取OpenClaw路径
 read -p "请输入OpenClaw路径 [默认: /home/admin/.npm-global/bin/openclaw]: " openclaw_path
-openclaw_path=${openclaw_path:-"/home/admin/.npm-global/bin/openclaw"}
+openclaw_path=${openclaw_path:-"/usr/local/bin/openclaw"}
 
 # 更新配置文件
 sed -i "s|WHATSAPP_NUMBER=\"+86.*\"|WHATSAPP_NUMBER=\"$whatsapp_number\"|g" config/.env

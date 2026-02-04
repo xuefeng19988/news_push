@@ -64,7 +64,7 @@ def send_whatsapp_message_optimized(message: str, max_retries: int = 2) -> bool:
                 else:
                     # 保存失败的消息
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                    backup_file = f"/home/admin/clawd/failed_msg_{timestamp}.txt"
+                    backup_file = f"./logs/failed_msg_{timestamp}.txt"
                     with open(backup_file, 'w', encoding='utf-8') as f:
                         f.write(message)
                     print(f"💾 消息已备份: {backup_file}")
@@ -244,7 +244,7 @@ def main():
                 if success:
                     # 保存发送记录
                     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-                    sent_file = f"/home/admin/clawd/sent_push_opt_{timestamp}.txt"
+                    sent_file = f"./logs/sent_push_opt_{timestamp}.txt"
                     with open(sent_file, 'w', encoding='utf-8') as f:
                         f.write(report)
                     

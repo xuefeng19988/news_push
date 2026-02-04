@@ -357,7 +357,7 @@ def main():
     
     # 保存报告
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-    report_file = f"/home/admin/clawd/time_importance_test_{timestamp}.txt"
+    report_file = f"./logs/time_importance_test_{timestamp}.txt"
     
     with open(report_file, 'w', encoding='utf-8') as f:
         f.write(report)

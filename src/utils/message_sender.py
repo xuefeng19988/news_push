@@ -9,7 +9,7 @@ import subprocess
 from typing import Optional, Tuple
 
 # 配置常量
-OPENCLAW_PATH = os.getenv("OPENCLAW_PATH", "/home/admin/.npm-global/bin/openclaw")
+OPENCLAW_PATH = os.getenv("OPENCLAW_PATH", os.getenv("OPENCLAW_PATH", "/usr/local/bin/openclaw"))
 WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "+86**********")
 
 def send_whatsapp_message(message: str, timeout: int = 30, max_retries: int = 1) -> Tuple[bool, str]:

@@ -124,7 +124,7 @@ def main():
     
     # 保存测试报告
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-    test_file = f"/home/admin/clawd/test_news_links_{timestamp}.txt"
+    test_file = f"./logs/test_news_links_{timestamp}.txt"
     
     with open(test_file, 'w', encoding='utf-8') as f:
         f.write(report)

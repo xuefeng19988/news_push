@@ -145,7 +145,7 @@ class ConfigManager:
         env_config = {
             # 基础配置
             "WHATSAPP_NUMBER": os.getenv("WHATSAPP_NUMBER", "+86**********"),
-            "OPENCLAW_PATH": os.getenv("OPENCLAW_PATH", "/home/admin/.npm-global/bin/openclaw"),
+            "OPENCLAW_PATH": os.getenv("OPENCLAW_PATH", os.getenv("OPENCLAW_PATH", "/usr/local/bin/openclaw")),
             "DATABASE_PATH": os.getenv("DATABASE_PATH", "./news_cache.db"),
             "STOCK_PUSH_START": os.getenv("STOCK_PUSH_START", "8"),
             "STOCK_PUSH_END": os.getenv("STOCK_PUSH_END", "18"),
@@ -203,7 +203,7 @@ def load_env_config():
     """加载环境变量配置（兼容旧代码）"""
     return {
         "WHATSAPP_NUMBER": os.getenv("WHATSAPP_NUMBER", "+86**********"),
-        "OPENCLAW_PATH": os.getenv("OPENCLAW_PATH", "/home/admin/.npm-global/bin/openclaw")
+        "OPENCLAW_PATH": os.getenv("OPENCLAW_PATH", os.getenv("OPENCLAW_PATH", "/usr/local/bin/openclaw"))
     }
 
 if __name__ == "__main__":

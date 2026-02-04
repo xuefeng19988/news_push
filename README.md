@@ -308,12 +308,12 @@ cp config/.env.example config/.env
 ### 必需配置
 1. **WhatsApp号码**: 用于接收推送消息
    ```bash
-   export WHATSAPP_NUMBER="+8612345678900"
+   export WHATSAPP_NUMBER="+86123****8900"
    ```
 
 2. **OpenClaw路径**: 消息发送工具路径
    ```bash
-   export OPENCLAW_PATH="/home/admin/.npm-global/bin/openclaw"
+   export OPENCLAW_PATH="/usr/local/bin/openclaw"  # 请根据实际路径修改
    ```
 
 ### 可选API配置 (增强功能)
@@ -348,7 +348,7 @@ source config/.env
 
 **方法3: 直接设置环境变量**
 ```bash
-export WHATSAPP_NUMBER="+8612345678900"
+export WHATSAPP_NUMBER="+86123****8900"
 export TWITTER_BEARER_TOKEN="your_token_here"
 # ... 其他变量
 ```

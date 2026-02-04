@@ -7,7 +7,7 @@
   },
   "twitter": {
     "enabled": true,
-    "api_key": null,
+    "api_key": "",
     "track_keywords": true,
     "max_tweets": 20
   },
