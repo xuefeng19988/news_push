@@ -6,7 +6,7 @@ echo ""
 
 # 主系统定时任务
 echo "添加主系统定时任务:"
-echo "0 * * * * cd $(pwd) && /usr/bin/python3 src/common/auto_push_system_optimized_final.py --run >> logs/logs/auto_push.log 2>&1"
+echo "0 * * * * cd $(pwd) && /usr/bin/python3 src/common/auto_push_system.py --run >> logs/logs/auto_push.log 2>&1"
 echo ""
 
 # 备份系统定时任务

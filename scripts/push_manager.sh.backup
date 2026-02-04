@@ -43,9 +43,9 @@ check_status() {
     
     # 检查定时任务
     echo "📅 定时任务:"
-    if crontab -l | grep -q "auto_push_system_optimized_final.py"; then
+    if crontab -l | grep -q "optimized_push_system.py"; then
         print_success "定时任务已设置"
-        crontab -l | grep "auto_push_system_optimized_final.py"
+        crontab -l | grep "optimized_push_system.py"
     else
         print_error "定时任务未设置"
     fi
@@ -69,7 +69,7 @@ check_status() {
     
     # 检查Python脚本
     echo "🐍 Python脚本:"
-    for script in "src/common/news_stock_pusher_optimized.py" "src/common/auto_push_system_optimized_final.py" "src/common/simple_push_system.py"; do
+    for script in "src/common/news_stock_pusher.py" "src/common/optimized_push_system.py" "src/common/simple_push_system.py"; do
         if [ -f "$script" ]; then
             SIZE=$(stat -c%s "$script")
             print_success "$(basename $script) - ${SIZE}字节"
@@ -123,7 +123,7 @@ run_now() {
     echo "🚀 立即运行推送..."
     echo ""
     
-    python3 auto_push_system_optimized_final.py --run
+    python3 auto_push_system.py --run
     
     if [ $? -eq 0 ]; then
         print_success "推送运行完成"
@@ -138,7 +138,7 @@ setup_cron() {
     echo "⏰ 设置定时任务..."
     echo ""
     
-    python3 auto_push_system_optimized_final.py --setup
+    python3 auto_push_system.py --setup
     
     if [ $? -eq 0 ]; then
         print_success "定时任务设置完成"
@@ -179,7 +179,7 @@ test_send() {
     echo "🧪 测试消息发送..."
     echo ""
     
-    python3 auto_push_system_optimized_final.py --test
+    python3 auto_push_system.py --test
     
     if [ $? -eq 0 ]; then
         print_success "测试消息发送成功"
