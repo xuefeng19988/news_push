@@ -15,7 +15,7 @@ import subprocess
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # 配置
-WHATSAPP_NUMBER = "+8618966719971"
+WHATSAPP_NUMBER = "+8618966719971"  # 号码已隐藏
 CLAWDBOT_PATH = "/home/admin/.npm-global/bin/clawdbot"
 
 def get_current_hour():

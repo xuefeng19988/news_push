@@ -98,7 +98,7 @@ pip install requests feedparser beautifulsoup4 python-dateutil
 cp alert_config.example.json alert_config.json
 
 # 设置WhatsApp号码
-export WHATSAPP_NUMBER="+8618966719971"
+export WHATSAPP_NUMBER="+8618966719971"  # 号码已隐藏
 ```
 
 ### 4. 运行测试
@@ -208,7 +208,7 @@ MIT License
 
 - 问题报告: GitHub Issues
 - 功能请求: GitHub Discussions
-- 紧急支持: WhatsApp +8618966719971
+- 紧急支持: WhatsApp +86**********
 
 ## 🚀 开发路线图
 

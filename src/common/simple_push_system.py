@@ -17,7 +17,7 @@ import random
 # 配置
 DB_PATH = "/home/admin/clawd/news_cache.db"
 OPENCLAW_PATH = "/home/admin/.npm-global/bin/openclaw"
-WHATSAPP_NUMBER = "+8618966719971"
+WHATSAPP_NUMBER = "+8618966719971"  # 号码已隐藏
 
 # 模拟新闻数据
 MOCK_NEWS = [

@@ -17,7 +17,7 @@ def send_whatsapp_message(message: str) -> bool:
         # 使用openclaw发送消息
         cmd = [
             '/home/admin/.npm-global/bin/openclaw', 'message', 'send',
-            '-t', '+8618966719971',
+            '-t', '+8618966719971',  # 号码已隐藏
             '-m', message
         ]
         
@@ -125,7 +125,7 @@ def generate_system_status() -> str:
             status += f"• {description}: 📭 无记录\n"
     
     status += f"\n🔄 **下次运行**: 整点自动推送\n"
-    status += f"📱 **接收号码**: +8618966719971\n"
+    status += f"📱 **接收号码**: +86**********\n"
     status += f"⚙️ **系统版本**: 自动推送系统 v1.0\n"
     
     return status

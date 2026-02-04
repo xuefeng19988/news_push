@@ -1060,7 +1060,7 @@ def main():
         print(f"\n{'='*60}")
         print("✅ 推送系统运行成功!")
         print("📤 请使用以下命令发送到WhatsApp:")
-        print(f"   openclaw message send -t +8618966719971 -m '报告内容'")
+        print(f"   openclaw message send -t +86********** -m .报告内容.")
         print(f"{'='*60}")
         return True
     else:

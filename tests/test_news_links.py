@@ -139,7 +139,7 @@ def main():
     print("-"*40)
     
     print(f"\n📤 请使用以下命令发送测试:")
-    print(f"   openclaw message send -t +8618966719971 -m '报告内容'")
+    print(f"   openclaw message send -t +86********** -m .报告内容.")
     
     return report
 

@@ -42,7 +42,7 @@ def send_whatsapp_message_optimized(message: str, max_retries: int = 2) -> bool:
             
             cmd = [
                 'openclaw', 'message', 'send',
-                '-t', '+8618966719971',
+                '-t', '+8618966719971',  # 号码已隐藏
                 '-m', message[:4000]  # 限制消息长度
             ]
             
