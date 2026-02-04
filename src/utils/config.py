@@ -143,6 +143,7 @@ class ConfigManager:
             环境变量配置字典
         """
         env_config = {
+            # 基础配置
             "WHATSAPP_NUMBER": os.getenv("WHATSAPP_NUMBER", "+86**********"),
             "OPENCLAW_PATH": os.getenv("OPENCLAW_PATH", "/home/admin/.npm-global/bin/openclaw"),
             "DATABASE_PATH": os.getenv("DATABASE_PATH", "./news_cache.db"),
@@ -151,7 +152,21 @@ class ConfigManager:
             "NEWS_PUSH_START": os.getenv("NEWS_PUSH_START", "8"),
             "NEWS_PUSH_END": os.getenv("NEWS_PUSH_END", "22"),
             "LOG_LEVEL": os.getenv("LOG_LEVEL", "INFO"),
-            "LOG_DIR": os.getenv("LOG_DIR", "./logs")
+            "LOG_DIR": os.getenv("LOG_DIR", "./logs"),
+            
+            # API密钥配置
+            "TWITTER_API_KEY": os.getenv("TWITTER_API_KEY", ""),
+            "TWITTER_API_SECRET": os.getenv("TWITTER_API_SECRET", ""),
+            "TWITTER_BEARER_TOKEN": os.getenv("TWITTER_BEARER_TOKEN", ""),
+            "WEIBO_API_KEY": os.getenv("WEIBO_API_KEY", ""),
+            "REDDIT_CLIENT_ID": os.getenv("REDDIT_CLIENT_ID", ""),
+            "REDDIT_CLIENT_SECRET": os.getenv("REDDIT_CLIENT_SECRET", ""),
+            "YAHOO_FINANCE_API_KEY": os.getenv("YAHOO_FINANCE_API_KEY", ""),
+            "NEWS_API_KEY": os.getenv("NEWS_API_KEY", ""),
+            
+            # 代理配置
+            "HTTP_PROXY": os.getenv("HTTP_PROXY", ""),
+            "HTTPS_PROXY": os.getenv("HTTPS_PROXY", ""),
         }
         return env_config
     

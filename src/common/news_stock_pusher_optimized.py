@@ -51,6 +51,15 @@ class NewsStockPusherOptimized(BasePusher):
         # 新闻源配置
         self.news_sources = self._load_news_sources()
         
+        # 社交媒体监控器
+        self.social_monitor = None
+        try:
+            from ..news.social_media_monitor import SocialMediaMonitor
+            self.social_monitor = SocialMediaMonitor()
+            self.logger.info("社交媒体监控器初始化完成")
+        except ImportError as e:
+            self.logger.warning(f"无法导入社交媒体监控器: {e}")
+        
         self.logger.info(f"初始化完成，监控 {len(self.stocks)} 只股票，{len(self.news_sources)} 个新闻源")
     
     def _load_news_sources(self) -> List[Dict[str, Any]]:
@@ -124,26 +133,6 @@ class NewsStockPusherOptimized(BasePusher):
                 'type': 'rss',
                 'url': 'https://www.scmp.com/rss/91/feed',
                 'category': '国际媒体'
-            },
-            
-            # 社交媒体
-            {
-                'name': '微博热搜',
-                'type': 'api',
-                'url': 'https://weibo.com/ajax/side/hotSearch',
-                'category': '社交媒体'
-            },
-            {
-                'name': 'Twitter趋势',
-                'type': 'api',
-                'url': 'https://api.twitter.com/1.1/trends/place.json?id=1',
-                'category': '社交媒体'
-            },
-            {
-                'name': 'Reddit热门',
-                'type': 'api',
-                'url': 'https://www.reddit.com/r/all/hot.json',
-                'category': '社交媒体'
             }
         ]
     
@@ -374,6 +363,14 @@ class NewsStockPusherOptimized(BasePusher):
                 report_parts.append(news_report)
             else:
                 report_parts.append("📰 新闻摘要\n暂时无法获取新闻数据\n")
+            
+            # 3. 社交媒体部分
+            self.logger.info("获取社交媒体数据...")
+            if self.social_monitor:
+                social_report = self.social_monitor.run()
+                report_parts.append(social_report)
+            else:
+                report_parts.append("📱 社交媒体\n社交媒体监控未启用\n")
         else:
             self.logger.info("不在新闻推送时间范围内")
         

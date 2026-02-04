@@ -49,6 +49,11 @@ sed -i "s|WHATSAPP_NUMBER=\"+86.*\"|WHATSAPP_NUMBER=\"$whatsapp_number\"|g" conf
 sed -i "s|OPENCLAW_PATH=\".*\"|OPENCLAW_PATH=\"$openclaw_path\"|g" config/.env
 
 echo ""
+echo "📡 API密钥配置 (可选):"
+echo "如果需要使用Twitter、微博、Reddit等API，请编辑 config/.env 文件"
+echo "并填写相应的API密钥。"
+
+echo ""
 echo "✅ 配置已保存到: config/.env"
 echo ""
 echo "📋 配置内容:"

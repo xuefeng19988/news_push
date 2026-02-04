@@ -303,6 +303,65 @@ cp config/.env.example config/.env
 
 ## 🚀 快速使用
 
+## 🔑 API配置
+
+### 必需配置
+1. **WhatsApp号码**: 用于接收推送消息
+   ```bash
+   export WHATSAPP_NUMBER="+8612345678900"
+   ```
+
+2. **OpenClaw路径**: 消息发送工具路径
+   ```bash
+   export OPENCLAW_PATH="/home/admin/.npm-global/bin/openclaw"
+   ```
+
+### 可选API配置 (增强功能)
+系统支持以下API，配置后可获得更多功能:
+
+| API | 功能 | 环境变量 |
+|-----|------|----------|
+| Twitter | 获取趋势话题 | `TWITTER_BEARER_TOKEN` |
+| 微博 | 获取热搜榜 | `WEIBO_API_KEY` |
+| Reddit | 获取热门帖子 | `REDDIT_CLIENT_ID`, `REDDIT_CLIENT_SECRET` |
+| Yahoo Finance | 股票数据 (高级) | `YAHOO_FINANCE_API_KEY` |
+| NewsAPI | 新闻聚合 | `NEWS_API_KEY` |
+
+### 配置方法
+
+**方法1: 使用配置脚本**
+```bash
+./setup_config.sh
+```
+
+**方法2: 手动配置**
+```bash
+# 复制配置文件模板
+cp config/.env.example config/.env
+
+# 编辑配置文件
+nano config/.env
+
+# 加载配置
+source config/.env
+```
+
+**方法3: 直接设置环境变量**
+```bash
+export WHATSAPP_NUMBER="+8612345678900"
+export TWITTER_BEARER_TOKEN="your_token_here"
+# ... 其他变量
+```
+
+### 检查配置
+```bash
+# 检查API配置状态
+python scripts/check_api_config.py
+
+# 测试系统配置
+python -m src.common.auto_push_system_optimized_final --test
+```
+
 ### 命令行工具
 安装后可以使用命令行工具：
 
