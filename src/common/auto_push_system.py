@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """
 自动推送系统 - 集成新闻和股票推送，自动发送到WhatsApp
@@ -17,7 +18,7 @@ def send_whatsapp_message(message: str) -> bool:
         # 使用openclaw发送消息
         cmd = [
             '/home/admin/.npm-global/bin/openclaw', 'message', 'send',
-            '-t', '+8618966719971',  # 号码已隐藏
+            '-t', os.getenv("WHATSAPP_NUMBER", "+86**********"),  # 从环境变量读取
             '-m', message
         ]
         

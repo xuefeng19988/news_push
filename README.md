@@ -97,18 +97,6 @@ pip install requests feedparser beautifulsoup4 python-dateutil
 # 编辑配置文件
 cp alert_config.example.json alert_config.json
 
-# 设置WhatsApp号码
-export WHATSAPP_NUMBER="+8618966719971"  # 号码已隐藏
-```
-
-### 4. 运行测试
-```bash
-# 测试新闻推送
-python3 test_international_news.py
-
-# 测试股票监控
-python3 test_alibaba_stock.py
-
 # 运行管理界面
 ./push_manager.sh status
 ```
@@ -335,3 +323,32 @@ echo ".gitignore" >> .gitignore
 - 数据文件 (`*.json`, `*.txt`)
 - 环境配置文件 (`.env`)
 - Python缓存文件 (`__pycache__/`)
+### 3. 配置环境
+```bash
+# 复制配置文件模板
+cp config/.env.example config/.env
+
+# 编辑配置文件，填写你的WhatsApp号码
+nano config/.env
+
+# 加载环境变量
+source config/.env
+
+# 验证配置
+echo "WhatsApp号码: $WHATSAPP_NUMBER"
+echo "OpenClaw路径: $OPENCLAW_PATH"
+```
+
+配置文件示例 (`config/.env.example`):
+```bash
+# WhatsApp配置
+WHATSAPP_NUMBER="+86**********"  # 请替换为你的WhatsApp号码
+
+# OpenClaw路径配置  
+OPENCLAW_PATH="/home/admin/.npm-global/bin/openclaw"
+
+# 其他配置...
+```
+
+### 4. 运行测试
+```bash

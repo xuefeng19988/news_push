@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """
 优化版推送系统 - 增加超时处理和错误恢复
@@ -42,7 +43,7 @@ def send_whatsapp_message_optimized(message: str, max_retries: int = 2) -> bool:
             
             cmd = [
                 'openclaw', 'message', 'send',
-                '-t', '+8618966719971',  # 号码已隐藏
+                '-t', os.getenv("WHATSAPP_NUMBER", "+86**********"),  # 从环境变量读取
                 '-m', message[:4000]  # 限制消息长度
             ]
             

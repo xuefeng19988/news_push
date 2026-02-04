@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """
 增强版智能推送调度器 - 集成所有功能
@@ -15,7 +16,7 @@ import subprocess
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # 配置
-WHATSAPP_NUMBER = "+8618966719971"  # 号码已隐藏
+WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "+86**********")  # 从环境变量读取
 CLAWDBOT_PATH = "/home/admin/.npm-global/bin/clawdbot"
 
 def get_current_hour():
