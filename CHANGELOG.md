@@ -81,3 +81,21 @@ python -m src.common.auto_push_system_optimized_final --status
 - `scripts/fix_hardcoded_paths.py`: 硬编码路径修复工具
 - `scripts/cleanup_project.py`: 项目清理工具
 
+
+## [0.0.4] - 2026-02-04
+### 文档和配置优化
+- 📝 **文档整理**: 全面更新README.md，合并所有说明文档
+- 🗂️ **文件管理**: 从Git中移除.gitignore和.toml文件
+- 📋 **使用指南**: 添加SETUP_GITIGNORE.md本地配置说明
+- 🏗️ **结构优化**: 更新项目结构说明，保持文档一致性
+- 🔧 **配置简化**: 提供本地.gitignore模板文件
+
+### 修复
+- 修复README.md中的过时信息
+- 更新项目结构描述
+- 优化配置说明
+
+### 新增文档
+- `SETUP_GITIGNORE.md`: 本地.gitignore设置指南
+- `.gitignore.local`: 本地.gitignore模板文件
+
