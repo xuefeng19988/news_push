@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 class SocialMediaMonitor:
     """社交媒体监控器"""
     
-    def __init__(self, config_file: str = "/home/admin/clawd/social_config.json"):
+    def __init__(self, config_file: str = "./config/social_config.json"):
         self.config_file = config_file
         self.config = self.load_config()
         
@@ -388,7 +388,7 @@ class SocialMediaMonitor:
             }
             
             timestamp = datetime.now().strftime("%Y%m%d_%H")
-            data_file = f"{self.data_dir}/social_data_{timestamp}.json"
+            data_file = f"./logs/stock_data/social_data_{timestamp}.json"
             
             with open(data_file, 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)

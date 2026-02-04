@@ -45,7 +45,7 @@ class SocialMediaMonitor:
         ]
         
         # 存储历史数据
-        self.history_file = "/home/admin/clawd/social_media_history.json"
+        self.history_file = "./logs/stock_data/social_media_history.json"
         self.history = self.load_history()
     
     def load_history(self) -> Dict:

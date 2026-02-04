@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 class GlobalNewsPusher:
     def __init__(self):
-        self.news_file = "/home/admin/clawd/news_history.json"
+        self.news_file = "./logs/stock_data/news_history.json"
         self.news_cache = {}
         self.load_news_cache()
         
