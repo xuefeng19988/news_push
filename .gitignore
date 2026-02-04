@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# System
+.DS_Store
+Thumbs.db
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.temp
+
+# Data files
+*.json
+*.txt
+*.csv
+*.xlsx
+*.xls
+
+# Project specific
+news_cache.db
+auto_push.log
+simple_push.log
+optimized_push.log
+sent_*.txt
+pending_*.txt
+latest_*.txt
+push_summary_*.txt
+system_summary_*.txt
+news_message_*.txt
+multi_stock_data_*.json
+alibaba_simple_data_*.json
+push_results_*.json
+social_data/
+message_queue/
+moltbook_credentials.txt
+opencode_web.pid
+send_log.json
+
+# Test output
+test_*.txt
+*_test_*.txt
+*_sample.txt
