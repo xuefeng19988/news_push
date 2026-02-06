@@ -1,458 +1,324 @@
-# 📰 智能新闻推送系统
+# 智能新闻推送系统 (Smart News Push System)
 
-一个基于AI的智能新闻和股票监控推送系统，支持多平台、多源新闻聚合和实时股票监控。
+## 📰 项目概述
 
-## 🎯 核心功能
+智能新闻推送系统是一个基于Python的自动化监控和推送系统，能够实时获取国际新闻、监控股票价格，并通过WhatsApp等平台进行智能推送。系统采用模块化架构设计，支持故障自动转移、健康监控和智能调度。
 
-### 📰 **智能新闻推送**
-- **多源新闻聚合**: BBC, CNN, 金融时报, 华尔街日报, 日经亚洲, 南华早报等高质量国际媒体
-- **财经媒体覆盖**: CNBC Business, Financial Times Business等权威财经媒体
-- **科技媒体覆盖**: TechCrunch, Wired等全球知名科技媒体
-- **优质中文媒体**: 36氪, 虎嗅等中国科技和商业媒体
-- **知识社区内容**: Reddit Finance, Reddit Technology等社区讨论
-- **智能摘要生成**: 120-150字符详细摘要，提取关键信息
-- **重要性评级**: 🔴🟠🟡🟢⚪ 5级重要性评级系统
-- **时间智能**: 更新时间解析和新鲜度计算
-- **可点击链接**: 所有新闻包含原文访问链接
+### ✨ 核心特性
 
-### 📈 **实时股票监控**
-- **热门股票监控**: 阿里巴巴、小米、比亚迪等
-- **实时价格获取**: 支持A股、港股、美股市场
-- **价格趋势分析**: 涨跌趋势和情绪分析
-- **价格警报系统**: 自定义价格阈值警报
-
-### 🔔 **可靠推送系统**
-- **定时推送**: 每小时整点自动推送 (08:00-22:00新闻，08:00-18:00股票)
-- **多平台支持**: 主要支持WhatsApp推送
-- **故障恢复**: 主备双系统保障推送成功率
-- **智能调度**: 根据时间段调整推送内容
-
-### 🛡️ **安全与隐私**
-- **API密钥管理**: 环境变量统一管理，无硬编码密钥
-- **隐私保护**: 无敏感信息硬编码，使用示例值
-- **访问控制**: 严格的API访问控制
-- **定期检查**: 隐私信息自动检查工具
+- **多源新闻聚合**: 集成36个国际新闻源，包括BBC、CNN、金融时报、澎湃新闻等
+- **实时股票监控**: 监控阿里巴巴、小米、比亚迪等热门股票实时价格
+- **智能推送调度**: 基于时间的智能推送策略（新闻: 8:00-22:00, 股票: 8:00-18:00）
+- **健康监控系统**: 基于situation-monitor架构的实时健康检查和告警
+- **故障自动转移**: 主备系统自动切换，确保推送可靠性
+- **模块化设计**: 易于扩展和维护的模块化架构
 
 ## 🏗️ 系统架构
 
+### 核心组件
+
 ```
-📱 用户界面层
-└── WhatsApp推送 (通过OpenClaw)
+智能新闻推送系统
+├── 📊 新闻监控模块 (News Monitoring)
+│   ├── 多源新闻聚合器
+│   ├── 智能文章分类器（8种类型）
+│   ├── 重要性评级系统（1-5级）
+│   └── 内容去重和缓存
+│
+├── 📈 股票监控模块 (Stock Monitoring)
+│   ├── 实时股价获取
+│   ├── 涨跌幅计算
+│   ├── 技术指标分析
+│   └── 异常波动检测
+│
+├── 🏥 健康监控系统 (Health Monitoring)
+│   ├── situation-monitor架构
+│   ├── 数据库连接检查
+│   ├── 消息平台可用性检查
+│   ├── 系统资源监控
+│   └── 智能告警升级
+│
+├── 📱 消息推送模块 (Message Delivery)
+│   ├── WhatsApp推送
+│   ├── 消息格式化
+│   ├── 推送调度
+│   └── 失败重试机制
+│
+└── 🔧 系统协调器 (System Coordinator)
+    ├── 智能主备切换
+    ├── 定时任务管理
+    ├── 运行状态监控
+    └── 日志和统计
+```
 
-⚡ 业务逻辑层
-├── 新闻推送系统 (news_stock_pusher_optimized.py)
-├── 股票监控系统 (multi_stock_monitor.py)
-├── 社交媒体监控 (social_media_monitor.py)
-├── 价格警报系统 (price_alert_system.py)
-└── 自动调度器 (auto_push_system_optimized_final.py)
+### 数据流向
 
-🔧 基础设施层
-├── 数据库管理 (database.py)
-├── 消息发送 (message_sender.py)
-├── 配置管理 (config.py)
-├── 日志系统 (logger.py)
-├── API管理 (api_manager.py)
-├── 定时任务 (Cron)
-└── 文件存储 (logs/)
+```
+定时触发 (每小时整点)
+├── smart_push.sh (协调器)
+│   ├── 主系统: new_push_system.py (基于situation-monitor)
+│   └── 备份系统: simple_push_system.py (简化版)
+└── 推送结果 → WhatsApp
 
-🌐 数据源层
-├── 国际新闻源 (BBC, CNN, 金融时报, 华尔街日报, 日经亚洲, 南华早报)
-├── 财经媒体源 (CNBC Business, Financial Times Business)
-├── 科技媒体源 (TechCrunch, Wired)
-├── 中文媒体源 (36氪, 虎嗅)
-├── 知识社区源 (Reddit Finance, Reddit Technology)
-├── 股票数据API (Yahoo Finance)
-└── 其他数据源
+监控推送 (每小时第15分钟)
+└── situation_monitor/run_situation_monitor_push.py
+```
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Python 3.8+
+- OpenClaw (用于WhatsApp消息发送)
+- SQLite3 (用于数据缓存)
+
+### 安装步骤
+
+1. **克隆仓库**
+   ```bash
+   git clone https://github.com/xuefeng19988/news_push.git
+   cd news_push
+   ```
+
+2. **安装依赖**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **配置环境**
+   ```bash
+   cp config/.env.example config/.env
+   # 编辑config/.env文件，填写你的配置
+   ```
+
+4. **配置OpenClaw**
+   - 确保OpenClaw已安装并配置WhatsApp
+   - 更新config/.env中的`WHATSAPP_NUMBER`和`OPENCLAW_PATH`
+
+5. **运行测试**
+   ```bash
+   python3 src/situation_monitor/new_push_system.py --dry-run
+   ```
+
+### 定时任务配置
+
+系统使用cron进行定时调度：
+
+```bash
+# 编辑crontab
+crontab -e
+
+# 添加以下任务
+# 主推送系统（每小时整点）
+0 * * * * cd /path/to/news_push && /bin/bash smart_push.sh >> logs/smart_coordinator.log 2>&1
+
+# 监控推送（每小时第15分钟）
+15 * * * * cd /path/to/news_push && python3 src/situation_monitor/run_situation_monitor_push.py >> logs/situation_monitor_push.log 2>&1
 ```
 
 ## 📁 项目结构
 
 ```
-clean_news_push/
-├── src/
-│   ├── common/                    # 通用模块
-│   │   ├── base_pusher.py         # 推送器基类
-│   │   ├── news_stock_pusher_optimized.py    # 优化版新闻股票推送器
-│   │   ├── auto_push_system_optimized_final.py # 自动推送系统
-│   │   ├── optimized_push_system.py          # 优化推送系统
-│   │   ├── simple_push_system.py             # 简单推送系统
-│   │   └── hourly_pusher.py                  # 小时推送器
+news_push/
+├── src/                            # 源代码目录
+│   ├── common/                     # 公共模块
+│   │   ├── news_stock_pusher_optimized.py    # 新闻股票推送器
+│   │   ├── auto_push_system_optimized_final.py # 旧版推送系统
+│   │   ├── simple_push_system.py   # 简化版推送系统
+│   │   └── base_pusher.py          # 推送器基类
 │   │
-│   ├── news/                      # 新闻相关模块
-│   │   ├── social_media_monitor.py          # 社交媒体监控
-│   │   └── get_china_news.py                # 国内新闻获取
+│   ├── stocks/                     # 股票监控模块
+│   │   └── multi_stock_monitor.py  # 多股票监控器
 │   │
-│   ├── stocks/                    # 股票相关模块
-│   │   ├── multi_stock_monitor.py           # 多股票监控
-│   │   └── price_alert_system.py            # 价格警报系统
+│   ├── news/                       # 新闻处理模块
+│   │   ├── situation_monitor_sources.py  # 新闻源配置
+│   │   └── get_china_news.py       # 中国新闻获取
 │   │
-│   └── utils/                     # 工具模块
-│       ├── message_sender.py      # 消息发送器
-│       ├── database.py            # 数据库管理
-│       ├── config.py              # 配置管理
-│       ├── logger.py              # 日志系统
-│       └── api_manager.py         # API管理器
+│   ├── monitoring/                 # 监控模块
+│   │   ├── health_check.py         # 健康检查
+│   │   ├── monitor_dashboard.py    # 监控面板
+│   │   └── alert_escalation.py     # 告警升级
+│   │
+│   ├── situation_monitor/          # situation-monitor架构
+│   │   ├── core/                   # 核心模块
+│   │   ├── checks/                 # 检查模块
+│   │   ├── alerts/                 # 告警模块
+│   │   ├── integration/            # 集成模块
+│   │   ├── new_push_system.py      # 新版推送系统
+│   │   └── run_situation_monitor_push.py  # 监控推送运行脚本
+│   │
+│   ├── utils/                      # 工具模块
+│   │   ├── config.py               # 配置管理
+│   │   ├── logger.py               # 日志工具
+│   │   ├── message_sender.py       # 消息发送器
+│   │   └── database.py             # 数据库工具
+│   │
+│   └── analytics/                  # 数据分析模块
+│       ├── trend_analyzer.py       # 趋势分析
+│       ├── stock_indicator_calculator.py  # 股票指标计算
+│       └── visualization_generator.py      # 可视化生成
 │
-├── config/                        # 配置文件
+├── config/                         # 配置文件
 │   ├── .env.example               # 环境变量示例
-│   ├── alert_config.json          # 警报配置
-│   ├── social_config.json         # 社交媒体配置
-│   └── clawdbot_stock_config.json # 股票配置
+│   └── *.json                     # JSON配置文件示例
 │
-├── scripts/                       # 工具脚本
-│   ├── push_manager.sh            # 推送管理脚本
-│   ├── check_api_config.py        # API配置检查
-│   ├── fix_hardcoded_paths.py     # 硬编码路径修复
-│   ├── check_privacy_issues.py    # 隐私问题检查
-│   ├── cleanup_project.py         # 项目清理
-│   └── update_version.py          # 版本更新
-│
-├── tests/                         # 测试文件
-│   ├── test_detailed_summary.py   # 详细摘要测试
-│   ├── test_international_news.py # 国际新闻测试
-│   ├── test_news_links.py         # 新闻链接测试
-│   ├── test_time_importance.py    # 时间重要性测试
-│   ├── test_deduplication.py      # 去重测试
-│   └── simple_deduplication_test.py # 简单去重测试
-│
-├── logs/                          # 日志目录
-├── main.py                        # 主入口文件
-├── README.md                      # 本文档
-├── CHANGELOG.md                   # 更新日志
+├── logs/                          # 日志目录（git忽略）
+├── smart_push.sh                  # 智能推送协调器脚本
 ├── requirements.txt               # Python依赖
-├── setup.py                       # 安装脚本
-└── VERSION                        # 版本文件
-```
-
-## 🔧 代码优化总结
-
-### 🎯 优化目标达成情况
-
-#### ✅ 已完成
-1. **消除重复函数** - 移除了20+个重复的函数定义
-2. **统一工具模块** - 创建了5个核心工具模块
-3. **简化项目结构** - 清理了11个重复/旧文件
-4. **统一配置管理** - 所有配置集中管理
-5. **统一日志系统** - 标准化日志记录
-
-#### 🔧 创建的工具模块
-| 模块 | 功能 | 替代的重复代码 |
-|------|------|---------------|
-| `src/utils/message_sender.py` | 统一消息发送 | 5个重复的`send_whatsapp_message`函数 |
-| `src/utils/database.py` | 统一数据库操作 | 4个重复的数据库函数 |
-| `src/utils/config.py` | 统一配置管理 | 重复的环境变量和配置文件读取 |
-| `src/utils/logger.py` | 统一日志记录 | 重复的日志设置代码 |
-| `src/common/base_pusher.py` | 基础推送器类 | 公共的推送器功能 |
-
-#### 📊 优化效果
-- **代码行数减少**: 约40%的重复代码被消除
-- **文件数量减少**: 从25个核心文件减少到13个
-- **维护性提高**: 统一的接口和模块化设计
-- **可扩展性增强**: 易于添加新功能和新数据源
-
-## 🚀 快速开始
-
-### 1. 环境要求
-- **Python**: 3.8+
-- **OpenClaw**: 已安装并配置
-- **SQLite3**: Python支持
-- **系统**: Linux/macOS/Windows (Linux推荐)
-
-### 2. 安装依赖
-```bash
-pip install -r requirements.txt
-```
-
-### 3. 配置系统
-```bash
-# 复制配置文件模板
-cp config/.env.example config/.env
-
-# 编辑配置文件
-nano config/.env
-```
-
-**必需配置**:
-```bash
-# WhatsApp号码 (接收推送)
-WHATSAPP_NUMBER="+86123****8900"
-
-# OpenClaw路径
-OPENCLAW_PATH="/usr/local/bin/openclaw"
-```
-
-**可选API配置** (增强功能):
-```bash
-# Twitter API (获取趋势)
-TWITTER_BEARER_TOKEN="your_token_here"
-
-# 微博API (获取热搜)
-WEIBO_API_KEY="your_key_here"
-
-# Reddit API (获取热门)
-REDDIT_CLIENT_ID="your_client_id"
-REDDIT_CLIENT_SECRET="your_secret"
-
-# Yahoo Finance API (股票数据)
-YAHOO_FINANCE_API_KEY="your_key"
-
-# NewsAPI (新闻聚合)
-NEWS_API_KEY="your_key"
-
-# 代理设置 (如果需要)
-HTTP_PROXY="http://proxy.example.com:8080"
-HTTPS_PROXY="http://proxy.example.com:8080"
-```
-
-### 4. 运行系统
-```bash
-# 测试API配置
-python scripts/check_api_config.py
-
-# 运行测试推送
-python -m src.common.auto_push_system_optimized_final --test
-
-# 设置定时任务 (每小时推送)
-0 * * * * cd /path/to/clean_news_push && /usr/bin/python3 -m src.common.auto_push_system_optimized_final --run >> logs/auto_push.log 2>&1
-```
-
-## 🔧 管理工具
-
-### 推送管理
-```bash
-# 查看系统状态
-./scripts/push_manager.sh status
-
-# 手动运行推送
-./scripts/push_manager.sh run
-
-# 查看日志
-./scripts/push_manager.sh logs
-
-# 设置定时任务
-./scripts/push_manager.sh cron
-```
-
-### 隐私检查
-```bash
-# 检查隐私问题
-python scripts/check_privacy_issues.py
-
-# 修复硬编码路径
-python scripts/fix_hardcoded_paths.py
-
-# 清理项目文件
-python scripts/cleanup_project.py
-```
-
-### 版本管理
-```bash
-# 更新版本
-python scripts/update_version.py
-
-# 查看当前版本
-cat VERSION
+├── README.md                      # 项目说明文档
+└── .gitignore                     # Git忽略文件
 ```
 
 ## ⚙️ 配置说明
 
-### 推送时间配置
-```bash
-# 股票推送时间 (24小时制)
-STOCK_PUSH_START=8    # 08:00开始
-STOCK_PUSH_END=18     # 18:00结束
+### 环境变量 (.env)
 
-# 新闻推送时间
-NEWS_PUSH_START=8     # 08:00开始
-NEWS_PUSH_END=22      # 22:00结束
+```bash
+# WhatsApp配置
+WHATSAPP_NUMBER="+1234567890"      # 接收推送的WhatsApp号码
+OPENCLAW_PATH="/path/to/openclaw"  # OpenClaw可执行文件路径
+
+# 推送时间配置
+STOCK_PUSH_START=8                 # 股票推送开始时间 (08:00)
+STOCK_PUSH_END=18                  # 股票推送结束时间 (18:00)
+NEWS_PUSH_START=8                  # 新闻推送开始时间 (08:00)
+NEWS_PUSH_END=22                   # 新闻推送结束时间 (22:00)
+
+# 日志配置
+LOG_LEVEL="INFO"                   # 日志级别: DEBUG, INFO, WARNING, ERROR
+LOG_DIR="./logs"                   # 日志目录
+
+# API密钥配置（可选）
+TWITTER_API_KEY=""                 # Twitter API密钥
+WEIBO_API_KEY=""                   # 微博API密钥
+NEWS_API_KEY=""                    # NewsAPI密钥
 ```
 
-### 数据库配置
-```bash
-# 数据库文件路径
-DATABASE_PATH="./news_cache.db"
+### 新闻源配置
 
-# 数据库清理 (自动清理7天前的记录)
-DATABASE_CLEANUP_DAYS=7
+系统支持36个新闻源，包括：
+
+1. **国际媒体**: BBC News, CNN International, Reuters, Financial Times
+2. **中文媒体**: 澎湃新闻, 新浪新闻, 网易新闻
+3. **社交媒体**: Twitter, 微博, Reddit
+4. **专业媒体**: Bloomberg, The Economist, Business Insider
+5. **科技媒体**: Ars Technica, The Verge, Hacker News, Techmeme
+
+新闻源配置位于 `src/news/situation_monitor_sources.py`，可轻松添加或修改。
+
+## 🔧 使用指南
+
+### 手动运行推送
+
+```bash
+# 运行新版推送系统（干跑模式）
+python3 src/situation_monitor/new_push_system.py --dry-run
+
+# 运行新版推送系统（实际推送）
+python3 src/situation_monitor/new_push_system.py
+
+# 运行备份系统
+python3 src/common/simple_push_system.py --run
+
+# 运行协调器脚本
+bash smart_push.sh
 ```
 
-### 日志配置
-```bash
-# 日志级别
-LOG_LEVEL="INFO"      # DEBUG, INFO, WARNING, ERROR
+### 健康检查
 
-# 日志目录
-LOG_DIR="./logs"
+```bash
+# 运行健康检查
+python3 -c "from src.monitoring.health_check import HealthChecker; hc = HealthChecker(); print(hc.check_quick())"
+
+# 查看监控面板
+python3 -c "from src.monitoring.monitor_dashboard import MonitorDashboard; md = MonitorDashboard(); print(md.display_compact())"
 ```
 
-## 📊 功能特性
+### 查看统计信息
 
-### 新闻功能
-- ✅ 多源新闻聚合 (15个高质量RSS源，全部验证有效)
-- ✅ 智能摘要生成 (120-150字符)
-- ✅ 重要性评级系统 (5级)
-- ✅ 更新时间智能解析
-- ✅ 文章去重 (7天数据库记录)
-- ✅ 可点击原文链接
-- ✅ 源有效性监控 (定期检查新闻源状态)
-- ✅ 财经内容增强 (CNBC, Financial Times等权威财经媒体)
-- ✅ 社区讨论内容 (Reddit财经和科技社区)
-
-### 股票功能
-- ✅ 实时股价监控
-- ✅ 多股票同时监控
-- ✅ 价格趋势分析
-- ✅ 自定义价格警报
-- ✅ 涨跌幅计算
-
-### 社交媒体
-- ✅ 微博热搜监控
-- ✅ Twitter趋势获取
-- ✅ Reddit热门帖子
-- ✅ API密钥统一管理
-
-### 系统特性
-- ✅ 定时自动推送
-- ✅ 主备双系统保障
-- ✅ 错误恢复机制
-- ✅ 详细日志记录
-- ✅ 配置化管理
-
-## 🔒 安全特性
-
-### API密钥安全
-- 🔐 环境变量管理，无硬编码密钥
-- 🔐 统一的API管理器
-- 🔐 配置模板和示例值
-- 🔐 隐私信息自动检查
-
-### 代码安全
-- 🔐 无敏感信息硬编码
-- 🔐 相对路径和配置化路径
-- 🔐 输入验证和错误处理
-- 🔐 定期安全扫描
-
-### 数据安全
-- 🔐 SQLite数据库加密选项
-- 🔐 日志文件权限控制
-- 🔐 配置文件访问控制
-- 🔐 数据备份和恢复
-
-## 🐛 故障排除
-
-### 常见问题
-
-**1. 推送失败**
 ```bash
-# 检查OpenClaw配置
-echo $OPENCLAW_PATH
-which openclaw
-
-# 检查WhatsApp号码
-echo $WHATSAPP_NUMBER
-
-# 查看错误日志
-tail -f logs/auto_push.log
+# 查看推送统计
+python3 src/situation_monitor/new_push_system.py --stats
 ```
 
-**2. API连接问题**
-```bash
-# 检查API配置
-python scripts/check_api_config.py
+## 🛠️ 开发指南
 
-# 测试网络连接
-curl -I https://news.bbc.co.uk
+### 添加新的新闻源
 
-# 检查代理设置
-echo $HTTP_PROXY
-echo $HTTPS_PROXY
-```
+1. 编辑 `src/news/situation_monitor_sources.py`
+2. 在 `get_all_news_sources()` 函数中添加新的新闻源
+3. 格式示例：
+   ```python
+   {
+       "name": "媒体名称",
+       "url": "RSS或API地址",
+       "type": "媒体类型",  # international, chinese, finance, tech
+       "language": "语言",  # en, zh
+       "category": "类别",  # news, business, tech, finance
+       "priority": 优先级   # 1-5，数字越大优先级越高
+   }
+   ```
 
-**3. 数据库问题**
-```bash
-# 检查数据库文件
-ls -la *.db
+### 扩展监控检查
 
-# 清理旧数据库
-rm -f news_cache.db
+1. 在 `src/situation_monitor/checks/` 目录下创建新的检查类
+2. 继承 `BaseCheck` 类
+3. 实现 `check()` 方法
+4. 在 `create_default_checks()` 函数中注册检查
 
-# 重新运行系统 (会自动创建新数据库)
-```
+### 添加新的消息平台
 
-### 日志查看
-```bash
-# 实时查看推送日志
-tail -f logs/auto_push.log
+1. 在 `src/utils/` 目录下创建新的消息发送器
+2. 实现标准的消息发送接口
+3. 在配置中添加相应的环境变量
+4. 在推送系统中集成新的发送器
 
-# 查看错误日志
-grep -i error logs/*.log
+## 📊 性能指标
 
-# 查看最近推送
-grep -i "推送完成" logs/*.log | tail -10
-```
+- **新闻获取时间**: < 5秒 (36个新闻源并发获取)
+- **健康检查时间**: < 0.3秒 (4项检查)
+- **推送成功率**: > 95% (主备系统保障)
+- **系统可用性**: 24/7 (故障自动转移)
 
-## 📈 性能优化
+## 🔄 版本历史
 
-### 代码优化
-- ✅ 统一工具模块 (减少40%代码重复)
-- ✅ 数据库连接池
-- ✅ 并发新闻获取
-- ✅ 智能缓存机制
-- ✅ 内存使用优化
+### v0.2.1 (当前版本)
+- ✅ 迁移到situation-monitor架构
+- ✅ 新版推送系统集成健康监控
+- ✅ 智能主备切换机制
+- ✅ 优化新闻源连接性（75%可用性）
 
-### 系统优化
-- ✅ 定时任务优化
-- ✅ 错误重试机制
-- ✅ 资源使用监控
-- ✅ 自动清理旧数据
-- ✅ 日志轮转
+### v0.2.0
+- ✅ 多源新闻聚合（36个新闻源）
+- ✅ 实时股票监控（3只热门股票）
+- ✅ 智能文章分类和重要性评级
+- ✅ 基础健康检查系统
+
+### v0.1.0
+- ✅ 基础推送功能
+- ✅ WhatsApp消息发送
+- ✅ 简单新闻获取
+
+## 📝 许可证
+
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
 ## 🤝 贡献指南
 
-### 开发环境设置
-```bash
-# 克隆仓库
-git clone https://github.com/xuefeng19988/news_push.git
-
-# 创建虚拟环境
-python -m venv venv
-source venv/bin/activate
-
-# 安装开发依赖
-pip install -r requirements.txt
-pip install black flake8 pytest
-```
-
-### 代码规范
-- 使用Black代码格式化
-- 遵循PEP 8编码规范
-- 添加类型注解
-- 编写单元测试
-- 更新文档和注释
-
-### 提交规范
-- 提交前运行测试
-- 更新CHANGELOG.md
-- 更新版本号
-- 添加有意义的提交信息
-
-## 📄 许可证
-
-本项目采用MIT许可证。
+1. Fork 本仓库
+2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m 'Add some amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 开启 Pull Request
 
 ## 📞 支持与反馈
 
-- **问题报告**: GitHub Issues
-- **功能请求**: GitHub Discussions
-- **安全漏洞**: 私密报告
-- **文档问题**: 提交PR修复
+如有问题或建议，请通过以下方式联系：
 
-## 🎉 致谢
-
-感谢所有贡献者和用户的支持！
+- 创建 [GitHub Issue](https://github.com/xuefeng19988/news_push/issues)
+- 提交 Pull Request
+- 查看项目文档
 
 ---
 
-**版本**: 0.1.0  
-**最后更新**: 2026-02-04  
-**状态**: 🟢 生产就绪 - 稳定版
+**智能新闻推送系统** - 让信息触手可及 🌸

@@ -15,9 +15,10 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from utils.config import ConfigManager, load_env_config
+from utils.config import ConfigManager
 from utils.logger import Logger, log_to_file
 from utils.database import NewsDatabase
+from src.monitoring.health_check import HealthChecker
 from .base_pusher import BasePusher
 from .news_stock_pusher_optimized import NewsStockPusherOptimized
 
@@ -30,7 +31,7 @@ class AutoPushSystemOptimized(BasePusher):
         
         # 加载配置
         self.config_mgr = ConfigManager()
-        self.env_config = load_env_config()
+        self.env_config = self.config_mgr.get_env_config()
         
         # 初始化新闻股票推送器
         self.news_stock_pusher = NewsStockPusherOptimized()
@@ -90,6 +91,46 @@ class AutoPushSystemOptimized(BasePusher):
         
         return status
     
+    def perform_health_check(self) -> dict:
+        """
+        执行完整的系统健康检查
+        
+        Returns:
+            健康检查报告字典
+        """
+        try:
+            self.logger.info("执行系统健康检查...")
+            
+            # 创建健康检查器
+            health_checker = HealthChecker(config_dir="config")
+            
+            # 执行检查
+            report = health_checker.check_all()
+            
+            # 记录结果
+            overall_status = report.get("overall_status", "unknown")
+            self.logger.info(f"健康检查完成，整体状态: {overall_status}")
+            
+            # 如果状态不健康，发送告警
+            if overall_status == "unhealthy":
+                self.logger.warning("系统状态不健康，准备发送告警")
+                # 这里可以调用发送告警的方法
+                # health_checker.send_health_report(report)
+            
+            # 保存健康检查结果到日志
+            # self._log_health_check(report)
+            
+            return report
+            
+        except Exception as e:
+            self.logger.error(f"健康检查失败: {e}")
+            from datetime import datetime
+            return {
+                "overall_status": "unhealthy",
+                "error": str(e),
+                "timestamp": datetime.now().isoformat()
+            }
+    
     def generate_status_report(self) -> str:
         """
         生成状态报告
@@ -146,6 +187,16 @@ class AutoPushSystemOptimized(BasePusher):
         start_time = time.time()
         self.logger.info("开始运行推送")
         
+        # 执行健康检查
+        try:
+            health_report = self.perform_health_check()
+            overall_status = health_report.get("overall_status", "unknown")
+            self.logger.info(f"健康检查状态: {overall_status}")
+            if overall_status == "unhealthy":
+                self.logger.warning("系统状态不健康，推送可能受影响")
+        except Exception as e:
+            self.logger.warning(f"健康检查执行失败: {e}")
+        
         try:
             # 运行新闻股票推送器
             success = self.news_stock_pusher.run_and_send()
@@ -177,8 +228,17 @@ class AutoPushSystemOptimized(BasePusher):
         
         # 保存状态报告
         timestamp = self.generate_timestamp()
-        status_file = self.log_dir / f"system_status_{timestamp}.txt"
-        self.save_to_file(status_report, str(status_file))
+        # 确保日志目录存在
+        logs_dir = Path("logs")
+        logs_dir.mkdir(exist_ok=True)
+        status_file = logs_dir / f"system_status_{timestamp}.txt"
+        # 直接保存，不使用save_to_file方法
+        try:
+            with open(status_file, 'w', encoding='utf-8') as f:
+                f.write(status_report)
+            self.logger.info(f"系统状态已保存到: {status_file}")
+        except Exception as e:
+            self.logger.error(f"保存文件失败: {status_file} - {e}")
         
         # 测试消息发送
         test_message = f"🔧 系统测试消息\n时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n状态: 测试运行中"

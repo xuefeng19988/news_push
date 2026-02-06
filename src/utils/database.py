@@ -14,6 +14,31 @@ from pathlib import Path
 class NewsDatabase:
     """新闻数据库管理类"""
     
+    def get_article_count(self) -> int:
+        """获取文章总数"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM pushed_articles")
+            result = cursor.fetchone()
+            return result[0] if result else 0
+        except Exception as e:
+            print(f"[Database Error] 获取文章总数失败: {e}")
+            return 0
+
+    def get_recent_articles_count(self, hours: int = 24) -> int:
+        """获取最近N小时的文章数"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute(
+                "SELECT COUNT(*) FROM pushed_articles WHERE pushed_at > datetime('now', ?)",
+                (f"-{hours} hours",)
+            )
+            result = cursor.fetchone()
+            return result[0] if result else 0
+        except Exception as e:
+            print(f"[Database Error] 获取最近文章数失败: {e}")
+            return 0
+
     def __init__(self, db_path: str = "./news_cache.db"):
         """
         初始化数据库连接

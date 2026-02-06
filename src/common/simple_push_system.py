@@ -6,14 +6,14 @@
 
 import os
 import sys
-import datetime
+from datetime import datetime
 from pathlib import Path
 
 # 修复导入路径
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 # 导入工具模块
-from utils.config import ConfigManager, load_env_config
+from utils.config import ConfigManager
 from utils.message_sender import send_whatsapp_message, get_whatsapp_number_display
 from utils.logger import Logger, log_to_file
 
@@ -30,7 +30,7 @@ class SimplePushSystem:
     
     def generate_simple_report(self) -> str:
         """生成简单报告"""
-        now = datetime.datetime.now()
+        now = datetime.now()
         
         # 模拟一些数据
         stock_data = {
@@ -95,7 +95,8 @@ class SimplePushSystem:
                 self.logger.info(f"发送结果: {result_msg}")
                 
                 # 保存报告到文件
-                timestamp = now.strftime("%Y%m%d_%H%M%S")
+                from datetime import datetime
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 filename = f"simple_push_{timestamp}.txt"
                 log_dir = Path("logs")
                 log_dir.mkdir(exist_ok=True)

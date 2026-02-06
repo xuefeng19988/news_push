@@ -1,0 +1,114 @@
+# 隐私文件和敏感数据
+.env
+*.env
+config/.env
+*.json
+!package.json
+!requirements.txt
+!README.md
+!config/.env.example
+moltbook_config.json
+config/*.json
+
+# 数据库文件
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# 日志文件
+logs/
+*.log
+*.log.*
+
+# 缓存和临时文件
+__pycache__/
+*.py[cod]
+*$py.class
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.env/
+.env.bak/
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# 文档文件（用户要求不提交.md文件）
+*.md
+!README.md
+
+# 特定排除的文件和目录
+moltbook_learning.db
+news_cache.db
+moltbook_learner.py
+send_email_via_gmail.py
+send_complete_report_via_gmail.py
+read_summarize_delete_emails.py
+send_email_smtp.py
+send_moltbook_report_to_zhangshaopeng.py
+send_pdf_result.py
+gmail_api_manager.py
+*.sh
+!smart_push.sh
+scripts/
+tests/monitoring/deep_monitoring_test.py
+tests/monitoring/
+quick_key_function_validation.py
+optimize_news_sources_phase1.py
+manual_fix_remaining_sources.py
+optimize_critical_sources.py
+verify_critical_optimization.py
+quick_connectivity_test.py
+comprehensive_execution_plan.md
+critical_sources_optimization*.json
+phase1_optimization_report*.json
+*.backup
+smart_push.sh.backup
+*.txt
+*.html
+
+# 备份文件
+*.backup
+*.py.backup*
+*.backup.py
+*_backup.py
+*.backup.*
+
+# 但保留核心源代码
+!src/
+!src/**/*.py
+!*.py
+
+# 允许的重要文件
+!requirements.txt
+!VERSION
+!smart_push.sh
+!config/.env.example

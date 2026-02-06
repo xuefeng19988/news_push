@@ -122,20 +122,37 @@ class BasePusher:
             checker = HealthChecker()
             report = checker.check_all()
             
+            # 计算健康百分比
+            status_counts = report.get("status_counts", {})
+            total_checks = sum(status_counts.values())
+            healthy_checks = status_counts.get("healthy", 0)
+            health_percentage = int((healthy_checks / total_checks * 100)) if total_checks > 0 else 0
+            
             if report["overall_status"] == "healthy":
-                return True, f"系统健康状态良好 ({report['summary']['health_percentage']}%)"
+                return True, f"系统健康状态良好 ({health_percentage}%)"
             else:
                 # 收集问题详情
                 problems = []
-                for check in report["checks"]:
-                    if check["status"] != "healthy":
-                        problems.append(f"{check['component']}: {check['message']}")
+                checks = report.get("checks", {})
+                
+                for check_name, check_result in checks.items():
+                    status = check_result.get("status", "unknown")
+                    if status != "healthy":
+                        component = check_result.get("component", check_name)
+                        details = check_result.get("details", {})
+                        
+                        if "error" in details:
+                            problems.append(f"{component}: {details['error']}")
+                        elif status == "unhealthy":
+                            problems.append(f"{component}: 状态异常")
+                        elif status == "warning":
+                            problems.append(f"{component}: 警告状态")
                 
                 problem_msg = " | ".join(problems[:3])  # 只显示前3个问题
                 if len(problems) > 3:
                     problem_msg += f" ... 还有{len(problems)-3}个问题"
                 
-                return False, f"系统健康状态有问题 ({report['summary']['health_percentage']}%): {problem_msg}"
+                return False, f"系统健康状态有问题 ({health_percentage}%): {problem_msg}"
                 
         except ImportError:
             self.logger.warning("健康检查模块未安装，跳过健康检查")
@@ -156,7 +173,7 @@ class BasePusher:
             是否在推送时间范围内
         """
         current_hour = datetime.now().hour
-        return start_hour <= current_hour < end_hour
+        return start_hour <= current_hour <= end_hour
     
     def should_push_stocks(self) -> bool:
         """
